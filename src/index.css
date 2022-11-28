@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  background: rgb(240, 209, 163);
+}
+
+.input {
+  width: 100px;
+}
+
+.table,
+th,
+td {
+  border: 1px solid;
+}
+
+th {
+    width: 100px;
+}
+
