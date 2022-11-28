@@ -55,11 +55,11 @@ export function initRouter(container: Element) {
     }
   }
 
-//   if (location.host.includes("github.io") || location.pathname == "/") {
-//     goTo("/piedra/hello");
-//   } else {
-//     handleRoute(location.pathname);
-//   }
+  if (location.host.includes("github.io") || location.pathname == "/") {
+    goTo("/dashboard");
+  } else {
+    handleRoute(location.pathname);
+  }
 
   window.onpopstate = function () {
     handleRoute(location.pathname);
