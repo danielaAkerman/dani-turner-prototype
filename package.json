@@ -7,9 +7,12 @@
   "devDependencies": {
     "parcel": "^2.8.0"
   },
-  "scripts":{
+  "scripts": {
     "dev": "parcel serve ./src/index.html",
     "build": "parcel build ./src/index.html --dist-dir build --public-url /dani-turner-prototype",
     "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.3.0"
   }
 }

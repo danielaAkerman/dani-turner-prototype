@@ -3,7 +3,7 @@ body {
   background: rgb(240, 209, 163);
 }
 
-.input {
+input {
   width: 100px;
 }
 
@@ -17,3 +17,95 @@ th {
     width: 100px;
 }
 
+* {
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(253, 224, 181);
+}
+
+.root {
+  max-width: 820px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  text-align: center;
+}
+@media (max-width: 500px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+.token-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+@media (max-width: 500px) {
+  .token-delete,
+  .token-getnew {
+    display: none;
+  }
+}
+
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button {
+  width: 100px;
+  position: relative;
+  font-weight: 600;
+  height: 40px;
+  padding: 12px 20px;
+  outline: none;
+  border: 1px solid black;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  top: 7px;
+  left: 7px;
+  height: 100%;
+  background-color: rgb(240, 177, 140);
+  z-index: -1;
+  transition: all 0.35s;
+  border-radius: inherit;
+}
+
+.button:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+
+input {
+  border: solid 1px;
+  font-family: "Courier New", Courier, monospace;
+  height: 36px;
+  border-radius: 5px;
+  background-color: rgb(253, 224, 181);
+}
+
+input:active,
+input:focus {
+  outline: none;
+  background-color: rgb(240, 177, 140);
+  transition: all 0.35s;
+}
