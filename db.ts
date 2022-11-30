@@ -7,6 +7,8 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
+export { db };
+
 // db.doc("usuarios/Juan")
 //   .set({
 //     nombre: "Juan",
@@ -40,4 +42,4 @@ const db = admin.firestore();
 
 // nuevaPersona({ nombre: "Dada" });
 
-export { db };
+
