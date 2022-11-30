@@ -2,6 +2,8 @@ export function pagePersonaFormulario(container) {
   const div = document.createElement("div");
   div.innerHTML = `
   <h2>NUEVA PERSONA</h2>
+  <form class="form">
+
   <div class="dni">
     <label for="dni" class="label">DNI:</label>
     <input id="dni" name="dni" class="input-dni" type="text" />
@@ -46,16 +48,20 @@ export function pagePersonaFormulario(container) {
   </div>
 
   <button class="button">ACEPTAR</button>
-  
+  </form>
  
   `;
 
-  const input = div.querySelector(".input");
-  const button = div.querySelector("button-comp");
+  const form = div.querySelector(".form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  button.addEventListener("click", (e) => {
-    // const userName =
-    // container.goTo("/instructions");
+    const target = e.target as any;
+    const data = new FormData(target);
+    const value = Object.fromEntries(data.entries());
+    const nombre = value.nombre;
+
+    console.log(value);
   });
 
   const style = document.createElement("style");

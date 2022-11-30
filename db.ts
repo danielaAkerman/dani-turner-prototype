@@ -23,10 +23,10 @@ usuariosColleccion.get().then((snap) => {
   }
 });
 
-// const daniDoc = usuariosColleccion.doc("Daniela");
-// daniDoc.get().then((snap) => {
-//   console.log(snap.exists, snap.data());
-// });
+const daniDoc = usuariosColleccion.doc("Daniela");
+daniDoc.get().then((snap) => {
+  console.log(snap.exists, snap.data());
+});
 
 // daniDoc.update({
 //   ultimavez: Date()
