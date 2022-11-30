@@ -2,16 +2,18 @@ export function pagePersonaVer(container) {
   const div = document.createElement("div");
   div.innerHTML = `
   <h2>VER PERSONAS</h2>
-  <div class="dni">
-      <label for="dni" class="label">DNI:</label>
-      <input id="dni" name="dni" class="input-dni" type="text" />
-    </div>
+
+  <form class="form">
+
+  <input id="dni" name="dni" placeholder="dni" class="input-dni" type="text" />
   
-    <div class="apellido">
-      <label for="apellido" class="label">Apellido:</label>
-      <input id="apellido" name="apellido" class="input-apellido" type="text" />
-    </div>
+  <input id="apellido" name="apellido" placeholder="apellido" class="input-apellido" type="text" />
+
   <button class="button">BUSCAR</button>
+
+  </form>
+  <br >
+
   <table>
       <tr>
         <th>ID</th>

@@ -4,15 +4,36 @@ export function pageAgenda(container) {
   const div = document.createElement("div");
   div.innerHTML = `
   <h2>AGENDA PROFESIONALES</h2>
-  <div class="profesional">
-    <label for="profesional" class="label">Profesional:</label>
+
+  <form class="form">
+
+
     <input
       id="profesional"
       name="profesional"
       class="input-profesional"
       type="text"
+      placeholder="Apellido profesional"
     />
-  </div>
+
+  <button class="button buscar">BUSCAR</button>
+  </form>
+
+  <br>
+
+
+  <form class="agenda-form">
+  
+  <input
+  id="duracion"
+  name="duracion"
+  class="input-duracion"
+  type="text"
+  placeholder="Duración del turno en minutos"
+  />
+
+  <br>
+  <br>
 
   <table>
     <tr>
@@ -51,16 +72,12 @@ export function pageAgenda(container) {
       <th>X</th>
     </tr>
   </table>
+  
+  <br>
 
-  <div class="duracion">
-  <label for="duracion" class="label">Duracion del turno:</label>
-  <input
-    id="duracion"
-    name="duracion"
-    class="input-duracion"
-    type="text"
-  />
-</div>
+  <button class="button aceptar">ACEPTAR</button>
+
+  </form>
 
   `;
 
@@ -73,12 +90,8 @@ export function pageAgenda(container) {
   // });
 
   const style = document.createElement("style");
-  style.textContent = `
-  .titulo{
-    font-size: 58px;
-    text-align: center;
-  }
-`;
+  style.textContent = ``;
+
   div.appendChild(style);
   return div;
 }

@@ -3,47 +3,43 @@ export function pageTurnosVer(container) {
   div.innerHTML = `
   <h2>VER TURNOS</h2>
 
-  <div class="filtro">
-    <label for="profesional" class="label">Profesional:</label>
-    <input
+  <form class="form">
+
+  <input
       id="profesional"
       name="profesional"
       class="input-profesional"
+      placeholder="profesional" 
       type="text"
     />
-  </div>
   
-  <div class="filtro">
-    <label for="especialidad:" class="label">Especialidad:</label>
-    <input
+  <input
       id="especialidad:"
       name="especialidad:"
       class="input-especialidad:"
+      placeholder="especialidad" 
       type="text"
     />
-  </div>
 
-  <div class="filtro">
-    <label for="estado:" class="label">Estado:</label>
-    <input
+  <input
       id="estado:"
       name="estado:"
       class="input-estado:"
+      placeholder="estado" 
       type="text"
     />
-  </div>
 
-  <div class="filtro">
-    <label for="paciente:" class="label">DNI Paciente:</label>
-    <input
+  <input
       id="paciente:"
       name="paciente:"
       class="input-paciente:"
+      placeholder="paciente" 
       type="text"
     />
-  </div>
 
-  <button class="buscar">BUSCAR</button>
+  <button class="buscar button">BUSCAR</button>
+
+  <form>
 
   <table class="table">
       <tr>

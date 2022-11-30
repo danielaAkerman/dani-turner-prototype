@@ -3,48 +3,33 @@ export function pageTurnosReservar(container) {
   div.innerHTML = `
   <h2>RESERVA DE TURNOS</h2>
 
-  <div class="paciente">
-    <label for="paciente" class="label">Paciente:</label>
-    <input id="paciente" name="paciente" class="input-paciente" type="text" />
-  </div>
+  <form class="form">
 
-  <div class="centro">
-    <label for="centro" class="label">Centro:</label>
-    <input id="centro" name="centro" class="input-centro" type="text" />
-  </div>
+  <input id="paciente" name="paciente" placeholder="paciente" class="input-paciente" type="text" />
 
-  <div class="especialidad">
-    <label for="especialidad" class="label">Especialidad:</label>
-    <input
+  <input id="centro" name="centro" placeholder="centro" class="input-centro" type="text" />
+
+  <input
       id="especialidad"
-      name="especialidad"
+      name="especialidad" placeholder="especialidad"
       class="input-especialidad"
       type="text"
     />
-  </div>
 
-  <div class="profesional">
-    <label for="profesional" class="label">Profesional:</label>
-    <input
+  <input
       id="profesional"
-      name="profesional"
+      name="profesional" placeholder="profesional"
       class="input-profesional"
       type="text"
     />
-  </div>
 
-  <div class="fecha">
-    <label for="fecha" class="label">Fecha:</label>
-    <input id="fecha" name="fecha" class="input-fecha" type="date" />
-  </div>
+  <input id="fecha" name="fecha" placeholder="fecha" class="input-fecha" type="date" />
 
-  <div class="hora">
-    <label for="hora" class="label">Hora:</label>
-    <input id="hora" name="hora" class="input-hora" type="time" />
-  </div>
+  <input id="hora" name="hora" placeholder="hora" class="input-hora" type="time" />
 
-  <button class="confirmar">CONFIRMAR</button>
+  <button class="confirmar button">CONFIRMAR</button>
   
+  </form>
  
   `;
 

@@ -1,10 +1,5 @@
-body {
-  margin: 0;
-  background: rgb(240, 209, 163);
-}
-
-input {
-  width: 100px;
+* {
+  font-family: "Courier New", Courier, monospace;
 }
 
 .table,
@@ -15,10 +10,6 @@ td {
 
 th {
     width: 100px;
-}
-
-* {
-  font-family: "Courier New", Courier, monospace;
 }
 
 body {
@@ -43,18 +34,7 @@ body {
   }
 }
 
-.token-container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 10px;
-}
-@media (max-width: 500px) {
-  .token-delete,
-  .token-getnew {
-    display: none;
-  }
-}
+
 
 
 
@@ -74,6 +54,7 @@ body {
   border: 1px solid black;
   background-color: transparent;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .button:after {
@@ -95,7 +76,7 @@ body {
 }
 
 
-input {
+input, select {
   border: solid 1px;
   font-family: "Courier New", Courier, monospace;
   height: 36px;
@@ -103,8 +84,8 @@ input {
   background-color: rgb(253, 224, 181);
 }
 
-input:active,
-input:focus {
+input:active, select:active, 
+input:focus, select:focus {
   outline: none;
   background-color: rgb(240, 177, 140);
   transition: all 0.35s;

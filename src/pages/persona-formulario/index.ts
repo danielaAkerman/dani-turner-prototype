@@ -4,48 +4,31 @@ export function pagePersonaFormulario(container) {
   <h2>NUEVA PERSONA</h2>
   <form class="form">
 
-  <div class="dni">
-    <label for="dni" class="label">DNI:</label>
-    <input id="dni" name="dni" class="input-dni" type="text" />
-  </div>
+  <input id="dni" name="dni" class="input-dni" placeholder="dni" type="text" />
 
-  <div class="apellido">
-    <label for="apellido" class="label">Aellido:</label>
-    <input id="apellido" name="apellido" class="input-apellido" type="text" />
-  </div>
+  <input id="apellido" name="apellido" class="input-apellido" placeholder="apellido" type="text" />
 
-  <div class="nombre">
-    <label for="nombre" class="label">Nombre:</label>
-    <input id="nombre" name="nombre" class="input-nombre" type="text" />
-  </div>
+  <input id="nombre" name="nombre" class="input-nombre" placeholder="nombre" type="text" />
 
-  <div class="fecha-nac">
-    <label for="fecha-nac" class="label">Fecha de nacimiento:</label>
-    <input
+  <input
       id="fecha-nac"
       name="fecha-nac"
       class="input-fecha-nac"
-      type="date"
+      placeholder="fecha de nacimiento" type="date"
     />
-  </div>
 
-  <div class="telefono">
-    <label for="telefono" class="label">Telefono:</label>
-    <input
+  <input
       id="telefono"
       name="telefono"
       class="input-telefono"
-      type="date"
+      placeholder="telefono" type="text"
     />
-  </div>
 
-  <div class="tipo">
-    <label for="tipo" class="label">Tipo:</label>
-    <select id="tipo" name="tipo" class="input-tipo" type="text">
+  <select id="tipo" name="tipo" class="input-tipo" type="text">
+      <option value="null"></option>
       <option value="profesional">Profesional</option>
       <option value="paciente">Paciente</option>
     </select>
-  </div>
 
   <button class="button">ACEPTAR</button>
   </form>
@@ -59,9 +42,9 @@ export function pagePersonaFormulario(container) {
     const target = e.target as any;
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
-    const nombre = value.nombre;
 
     console.log(value);
+   
   });
 
   const style = document.createElement("style");

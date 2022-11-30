@@ -2,19 +2,43 @@ export function pageDashboard(container) {
   const div = document.createElement("div");
   div.innerHTML = `
 
-  <h2>DASHBOARD
-  </h2>
+  <h2>DASHBOARD</h2>
+
+  <button class="button agenda">AGENDA</button>
+  <button class="button nuevapersona">NUEVA PERSONA</button>
+  <button class="button verpersona">VER PERSONA</button>
+  <button class="button nuevoturno">NUEVO TURNO</button>
+  <button class="button verturno">VER TURNO</button>
  
   `;
 
+  const agenda = div.querySelector(".agenda");
+  agenda.addEventListener("click", () => {
+    container.goTo("/agenda");
+  });
+
+  const nuevapersona = div.querySelector(".nuevapersona");
+  nuevapersona.addEventListener("click", () => {
+    container.goTo("/persona-formulario");
+  });
+
+  const verpersona = div.querySelector(".verpersona");
+  verpersona.addEventListener("click", () => {
+    container.goTo("/persona-ver");
+  });
+
+  const nuevoturno = div.querySelector(".nuevoturno");
+  nuevoturno.addEventListener("click", () => {
+    container.goTo("/turno-reservar");
+  });
+
+  const verturno = div.querySelector(".verturno");
+  verturno.addEventListener("click", () => {
+    container.goTo("/turno-ver");
+  });
 
   const style = document.createElement("style");
-  style.textContent = `
-  .titulo{
-    font-size: 58px;
-    text-align: center;
-  }
-`;
+  style.textContent = ``;
   div.appendChild(style);
   return div;
 }
