@@ -1,3 +1,4 @@
+import { pageLogin } from "./pages/log-in";
 import { pageDashboard } from "./pages/dashboard";
 import { pageAgenda } from "./pages/agenda";
 import { pagePersonaFormulario } from "./pages/persona-formulario";
@@ -8,7 +9,11 @@ import { pageTurnosVer } from "./pages/turno-ver";
 const routes = [
   {
     path: /\//,
-    handler: pageDashboard,
+    handler: pageLogin,
+  },
+  {
+    path: /\/login/,
+    handler: pageLogin,
   },
   {
     path: /\/dashboard/,
@@ -56,7 +61,7 @@ export function initRouter(container: Element) {
   }
 
   if (location.host.includes("github.io") || location.pathname == "/") {
-    goTo("/dashboard");
+    goTo("/login");
   } else {
     handleRoute(location.pathname);
   }

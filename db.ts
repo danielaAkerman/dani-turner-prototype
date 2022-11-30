@@ -14,8 +14,8 @@ const db = admin.firestore();
 //   })
 //   .then((res) => console.log(res));
 
-const usuariosColleccion = db.collection("usuarios");
-const personasColleccion = db.collection("personas");
+// const usuariosColleccion = db.collection("usuarios");
+// const personasColleccion = db.collection("personas");
 
 // usuariosColleccion.get().then((snap) => {
 //   let docs = snap.docs;
@@ -33,11 +33,11 @@ const personasColleccion = db.collection("personas");
 //   ultimavez: Date()
 // })
 
-function nuevaPersona(objeto: object) {
-  const nuevapersona = personasColleccion.doc();
-  nuevapersona.create(objeto).then((res) => console.log(nuevapersona.id));
-}
+// function nuevaPersona(objeto: object) {
+//   const nuevapersona = personasColleccion.doc();
+//   nuevapersona.create(objeto).then((res) => console.log(nuevapersona.id));
+// }
 
-nuevaPersona({ nombre: "Dada" });
+// nuevaPersona({ nombre: "Dada" });
 
-export { db, nuevaPersona };
+export { db };

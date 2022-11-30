@@ -1,14 +1,11 @@
 export function pageAgenda(container) {
-  console.log("hola soy la agenda");
-  
   const div = document.createElement("div");
   div.innerHTML = `
   <h2>AGENDA PROFESIONALES</h2>
 
   <form class="form">
 
-
-    <input
+      <input
       id="profesional"
       name="profesional"
       class="input-profesional"
@@ -16,14 +13,7 @@ export function pageAgenda(container) {
       placeholder="Apellido profesional"
     />
 
-  <button class="button buscar">BUSCAR</button>
-  </form>
 
-  <br>
-
-
-  <form class="agenda-form">
-  
   <input
   id="duracion"
   name="duracion"
@@ -31,9 +21,6 @@ export function pageAgenda(container) {
   type="text"
   placeholder="Duración del turno en minutos"
   />
-
-  <br>
-  <br>
 
   <table>
     <tr>
@@ -50,30 +37,30 @@ export function pageAgenda(container) {
 
     <tr>
       <th>IN</th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
+      <th><input name="in-lunes" class="input in-lunes" type="time" /></th>
+      <th><input name="in-martes" class="input in-martes" type="time" /></th>
+      <th><input name="in-mierc" class="input in-mierc" type="time" /></th>
+      <th><input name="in-juev" class="input in-juev" type="time" /></th>
+      <th><input name="in-vier" class="input in-vier" type="time" /></th>
+      <th><input name="in-sab" class="input in-sab" type="time" /></th>
+      <th><input name="in-dom" class="input in-dom" type="time" /></th>
       <th>X</th>
     </tr>
 
     <tr>
       <th>OUT</th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
-      <th><input class="input" type="time" /></th>
+      <th><input name="out-lunes" class="input out-lunes" type="time" /></th>
+      <th><input name="out-martes" class="input out-martes" type="time" /></th>
+      <th><input name="out-mierc" class="input out-mierc" type="time" /></th>
+      <th><input name="out-juev" class="input out-juev" type="time" /></th>
+      <th><input name="out-vier" class="input out-vier" type="time" /></th>
+      <th><input name="out-sab" class="input out-sab" type="time" /></th>
+      <th><input name="out-dom" class="input out-dom" type="time" /></th>
       <th>X</th>
     </tr>
   </table>
   
-  <br>
+
 
   <button class="button aceptar">ACEPTAR</button>
 
@@ -81,16 +68,24 @@ export function pageAgenda(container) {
 
   `;
 
-  // const input = div.querySelector(".input");
-  // const button = div.querySelector("button-comp");
+  const form = div.querySelector(".form");
 
-  // button.addEventListener("click", (e) => {
-  //   // const userName =
-  //   // container.goTo("/instructions");
-  // });
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const target = e.target as any;
+    const data = new FormData(target);
+    const value = Object.fromEntries(data.entries());
+
+    console.log("Agenda: ", value);
+  });
 
   const style = document.createElement("style");
-  style.textContent = ``;
+  style.textContent = `
+  .input-duracion{
+    width: 200px;
+  }
+  `;
 
   div.appendChild(style);
   return div;
