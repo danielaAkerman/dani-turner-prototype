@@ -2,12 +2,14 @@ import * as express from "express";
 import { db } from "./db";
 import { v4 as uuidv4 } from "uuid";
 import * as cors from "cors";
+import { json } from "body-parser";
 
 const dev = process.env.NODE_ENV == "development";
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(json());
 
 const usersCollection = db.collection("usuarios");
 
@@ -29,19 +31,36 @@ app.get("/hola", (req, res) => {
   });
 });
 
-app.post("/holi", (req, res) => {
-  usersCollection.get().then((resp) => {
-    if (resp.empty) {
-      res.status(404).json({
-        message: "not found",
-      });
-    } else {
-      res.json(
-        usersCollection.add({ prueba: true }).then((resp) => {
-          res.json(resp);
-        })
-      );
-    }
+// CREA UN REGISTRO NUEVO EN LA BASE DE DATOS
+// LO QUE OBTENGA POR REQ.BODY
+// DEVUELVE EL NUEVO ID
+app.post("/usuarios", function (req, res) {
+  const nuevoUsuario = usersCollection.doc();
+  nuevoUsuario.create(req.body).then((resp) => console.log(nuevoUsuario.id));
+  res.json({ id: nuevoUsuario.id });
+});
+
+// PARA OBTENER TODOS LOS DATOS DE UN USUARIO
+// LE PASAMOS SU ID, DEVUELVE TODO EL OBJETO
+app.get("/usuarios/:id", function (req, res) {
+  const userId = req.params.id;
+  const userDoc = usersCollection.doc(userId);
+  userDoc.get().then((snap) => {
+    const snapData = snap.data();
+    res.json(snapData); // Si pongo .nombre me devuelve ese datito pelado
+  });
+});
+
+
+// ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
+// LE AGREGUÉ TMB UN LAST ACCESS
+app.patch("/usuarios/:id", function (req, res) {
+  const userId = req.params.id;
+  const body = req.body;
+  body.lastAccess = new Date();
+  const userDoc = usersCollection.doc(userId);
+  userDoc.update(body).then((result) => {
+    res.json({ message: "ok" });
   });
 });
 
