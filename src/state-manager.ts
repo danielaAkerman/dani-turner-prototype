@@ -16,6 +16,13 @@ const state = {
   getState() {
     return this.data;
   },
+  setState(newState) {
+    this.data = newState;
+    // for (const cb of this.listeners) {
+    //   cb();
+    // }
+    console.log("state: ", this.data);
+  },
 
   iniciarSesion(usuario, root) {
     const currentState = this.getState();
@@ -36,22 +43,32 @@ const state = {
           console.error("no existe el user");
         } else {
           if (usuario.password == data.password) {
-            currentState.userId= data.userId
+            currentState.userId = data.userId;
             root.goTo("/dashboard");
           } else {
             console.error("password incorrecta");
           }
         }
       });
-      this.setState(currentState);
+    this.setState(currentState);
   },
 
-  setState(newState) {
-    this.data = newState;
-    // for (const cb of this.listeners) {
-    //   cb();
-    // }
-    // console.log(this.data);
+  nuevaPersona(persona, root) {
+    fetch(url + "/newperson", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(persona),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Se creó el nuevo registro. ", data);
+        // NO DEVUELVE EL ID, NO SÉ POR QUE
+        root.goTo("/dashboard");
+      });
   },
 };
 export { state };

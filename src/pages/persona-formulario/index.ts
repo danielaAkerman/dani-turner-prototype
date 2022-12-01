@@ -1,3 +1,5 @@
+import {state} from "../../state-manager"
+
 export function pagePersonaFormulario(container) {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -43,7 +45,7 @@ export function pagePersonaFormulario(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
 
-    console.log(value);
+    state.nuevaPersona(value, container)
    
   });
 

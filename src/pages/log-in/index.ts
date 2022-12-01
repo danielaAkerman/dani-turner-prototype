@@ -22,7 +22,7 @@ export function pageLogin(container) {
       id="password"
       name="password"
       class="input-password"
-      type="text"
+      type="password"
       placeholder="Contraseña"
     />
 
@@ -40,7 +40,7 @@ export function pageLogin(container) {
     const target = e.target as any;
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
-    console.log(value);
+
     state.iniciarSesion(value, container)
     // container.goTo("/dashboard");
   });

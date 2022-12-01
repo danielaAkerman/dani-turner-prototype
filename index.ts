@@ -12,6 +12,7 @@ app.use(cors());
 app.use(json());
 
 const usersCollection = db.collection("users");
+const personsCollection = db.collection("persons");
 
 // app.get("/env", (req, res) => {
 //   res.json({
@@ -51,7 +52,6 @@ app.get("/users/:id", function (req, res) {
   });
 });
 
-
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
 app.patch("/users/:id", function (req, res) {
@@ -64,6 +64,7 @@ app.patch("/users/:id", function (req, res) {
   });
 });
 
+// FUNCIONA PERFECTO:
 app.post("/login", function (req, res) {
   const { username } = req.body;
   // const { password } = req.body;
@@ -84,36 +85,28 @@ app.post("/login", function (req, res) {
     });
 });
 
-app.post("/signin", function (req, res) {
-  const { password } = req.body;
-  const { nombre } = req.body;
-  usersCollection
-    .where("nombre", "==", nombre)
-    .get()
-    .then((resp) => {
-      if (resp.empty) {
-        res.status(400).json(req.body);
-      } else {
-        res.json(resp);
-      }
-    });
-});
+// app.post("/signin", function (req, res) {
+//   const { password } = req.body;
+//   const { nombre } = req.body;
+//   usersCollection
+//     .where("nombre", "==", nombre)
+//     .get()
+//     .then((resp) => {
+//       if (resp.empty) {
+//         res.status(400).json(req.body);
+//       } else {
+//         res.json(resp);
+//       }
+//     });
+// });
 
-app.post("/signup", function (req, res) {
-  const { email } = req.body;
-  const { nombre } = req.body;
-  usersCollection
-    .where("email", "==", email)
-    .get()
-    .then((resp) => {
-      if (resp.empty) {
-        usersCollection.add(req.body).then((newUserRef) => {
-          res.json({ id: newUserRef.id });
-        });
-      } else {
-        res.status(400).json({ message: "user already exists" });
-      }
-    });
+// CREA UN REGISTRO NUEVO EN LA BASE DE DATOS
+// LO QUE OBTENGA POR REQ.BODY
+// DEVUELVE EL NUEVO ID
+app.post("/newperson", function (req, res) {
+  const newperson = personsCollection.doc();
+  newperson.create(req.body).then(() => console.log(newperson.id));
+  res.json({ id: newperson.id });
 });
 
 // app.post("/rooms", (req, res) => {
