@@ -70,5 +70,19 @@ const state = {
         root.goTo("/dashboard");
       });
   },
+
+verPersona(dni, root){
+  fetch(url + "/persons/" + dni )
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log("La data es: ", data);
+      // NO DEVUELVE EL ID, NO SÉ POR QUE
+      // root.goTo("/dashboard");
+    });
+}
+
+
 };
 export { state };

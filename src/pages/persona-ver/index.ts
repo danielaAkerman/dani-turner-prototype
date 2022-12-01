@@ -1,3 +1,5 @@
+import { state } from "../../state-manager";
+
 export function pagePersonaVer(container) {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -7,8 +9,6 @@ export function pagePersonaVer(container) {
 
   <input id="dni" name="dni" placeholder="dni" class="input-dni" type="text" />
   
-  <input id="apellido" name="apellido" placeholder="apellido" class="input-apellido" type="text" />
-
   <button class="button">BUSCAR</button>
 
   </form>
@@ -29,7 +29,16 @@ export function pagePersonaVer(container) {
  
   `;
 
+  const form = div.querySelector(".form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
+    const target = e.target as any;
+    const data = new FormData(target);
+    const value = Object.fromEntries(data.entries());
+    const dni = value.dni;
+    state.verPersona(dni, container);
+  });
 
   const style = document.createElement("style");
   style.textContent = `

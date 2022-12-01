@@ -52,6 +52,18 @@ app.get("/users/:id", function (req, res) {
   });
 });
 
+// PARA VER PERSONA
+app.get("/persons/:dni", function (req, res) {
+  const { dni } = req.params;
+  personsCollection
+    .where("dni", "==", dni)
+    .get()
+    .then((snap) => {
+      const snapData = snap.docs[0].data();
+      res.json(snapData);
+    });
+});
+
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
 app.patch("/users/:id", function (req, res) {
@@ -106,7 +118,7 @@ app.post("/login", function (req, res) {
 app.post("/newperson", function (req, res) {
   const newperson = personsCollection.doc();
   newperson.create(req.body).then(() => console.log(newperson.id));
-  res.json({ id: newperson.id });
+  res.json({ id: newperson.id }); // Lo está devolviendo bien?
 });
 
 // app.post("/rooms", (req, res) => {
