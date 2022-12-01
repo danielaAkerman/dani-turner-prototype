@@ -71,15 +71,15 @@ const state = {
       });
   },
 
-verPersona(dni, root){
+verPersona(dni){
   fetch(url + "/persons/" + dni )
     .then((res) => {
       return res.json();
     })
     .then((data) => {
       console.log("La data es: ", data);
-      // NO DEVUELVE EL ID, NO SÉ POR QUE
-      // root.goTo("/dashboard");
+
+
     });
 }
 
