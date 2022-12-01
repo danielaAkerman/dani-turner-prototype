@@ -1,29 +1,29 @@
 import * as express from "express";
-import { db } from "./db";
+import { db } from "./src/db";
 import { v4 as uuidv4 } from "uuid";
 import * as cors from "cors";
 import { json } from "body-parser";
 
-const dev = process.env.NODE_ENV == "development";
+// const dev = process.env.NODE_ENV == "development";
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(json());
 
-const usersCollection = db.collection("usuarios");
+const usersCollection = db.collection("users");
 
-app.get("/env", (req, res) => {
-  res.json({
-    environment: process.env.NODE_ENV,
-  });
-});
+// app.get("/env", (req, res) => {
+//   res.json({
+//     environment: process.env.NODE_ENV,
+//   });
+// });
 
-app.get("/lugar", (req, res) => {
-  res.json({
-    lugar: process.env.LUGAR,
-  });
-});
+// app.get("/lugar", (req, res) => {
+//   res.json({
+//     lugar: process.env.LUGAR,
+//   });
+// });
 
 app.get("/hola", (req, res) => {
   res.json({
@@ -34,7 +34,7 @@ app.get("/hola", (req, res) => {
 // CREA UN REGISTRO NUEVO EN LA BASE DE DATOS
 // LO QUE OBTENGA POR REQ.BODY
 // DEVUELVE EL NUEVO ID
-app.post("/usuarios", function (req, res) {
+app.post("/users", function (req, res) {
   const nuevoUsuario = usersCollection.doc();
   nuevoUsuario.create(req.body).then((resp) => console.log(nuevoUsuario.id));
   res.json({ id: nuevoUsuario.id });
@@ -42,7 +42,7 @@ app.post("/usuarios", function (req, res) {
 
 // PARA OBTENER TODOS LOS DATOS DE UN USUARIO
 // LE PASAMOS SU ID, DEVUELVE TODO EL OBJETO
-app.get("/usuarios/:id", function (req, res) {
+app.get("/users/:id", function (req, res) {
   const userId = req.params.id;
   const userDoc = usersCollection.doc(userId);
   userDoc.get().then((snap) => {
@@ -54,7 +54,7 @@ app.get("/usuarios/:id", function (req, res) {
 
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
-app.patch("/usuarios/:id", function (req, res) {
+app.patch("/users/:id", function (req, res) {
   const userId = req.params.id;
   const body = req.body;
   body.lastAccess = new Date();
@@ -64,20 +64,21 @@ app.patch("/usuarios/:id", function (req, res) {
   });
 });
 
-app.post("/auth", function (req, res) {
-  const { email } = req.body;
+app.post("/login", function (req, res) {
+  const { username } = req.body;
+  // const { password } = req.body;
   usersCollection
-    .where("email", "==", email)
+    .where("username", "==", username)
     .get()
     .then((resp) => {
       if (resp.empty) {
         res.status(404).json({
-          message: "not found",
+          message: "User not found",
         });
       } else {
         res.json({
           id: resp.docs[0].id,
-          nombre: resp.docs[0].data().nombre,
+          password: resp.docs[0].data().password,
         });
       }
     });

@@ -1,3 +1,5 @@
+import { state } from "../../state-manager";
+
 export function pageLogin(container) {
   
   const div = document.createElement("div");
@@ -9,11 +11,11 @@ export function pageLogin(container) {
   <form class="form">
 
     <input
-      id="usuario"
-      name="usuario"
-      class="input-usuario"
+      id="username"
+      name="username"
+      class="input-username"
       type="text"
-      placeholder="Usuario"
+      placeholder="username"
     />
 
     <input
@@ -38,9 +40,9 @@ export function pageLogin(container) {
     const target = e.target as any;
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
-
-    console.log("Profesional: ", value);
-    container.goTo("/dashboard");
+    console.log(value);
+    state.iniciarSesion(value, container)
+    // container.goTo("/dashboard");
   });
 
   const style = document.createElement("style");
