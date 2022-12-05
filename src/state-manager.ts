@@ -81,7 +81,29 @@ verPersona(dni){
 
 
     });
-}
+},
+
+
+agregarTurnos(obj){
+  const profDni = obj.profesional
+  // const profDni = obj.profesional.toString()
+  fetch(url + "/agenda/" + profDni, {
+    method: "patch",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  })
+    //  .then((resp) => {
+    //    return resp.json();
+    //  })
+    //  .then((data) => {
+    //    console.log("Desde State: ", data);
+
+    //  });
+},
+
+
 
 
 };

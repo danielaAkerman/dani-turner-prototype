@@ -13,6 +13,8 @@ app.use(json());
 
 const usersCollection = db.collection("users");
 const personsCollection = db.collection("persons");
+const turnosCollection = db.collection("turnos");
+const agendaCollection = db.collection("agenda");
 
 // app.get("/env", (req, res) => {
 //   res.json({
@@ -64,6 +66,7 @@ app.get("/persons/:dni", function (req, res) {
     });
 });
 
+
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
 app.patch("/users/:id", function (req, res) {
@@ -75,6 +78,20 @@ app.patch("/users/:id", function (req, res) {
     res.json({ message: "ok" });
   });
 });
+
+
+// PARA AGREGAR TURNOS
+// PARA FUNCIONAR, PRIMERO TIENE QUE EXISTIR ESE DOC, NO LO CREA
+// NO ANDA
+app.patch("/agenda/:dni", function (req, res) {
+  const dniProfesional = req.params.dni;
+  const body = req.body;
+  const newAgendaDoc = agendaCollection.doc(dniProfesional);
+  newAgendaDoc.update(body).then(() => {
+    res.json({ message: "ok" });
+  });
+});
+
 
 // FUNCIONA PERFECTO:
 app.post("/login", function (req, res) {
@@ -199,3 +216,4 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log("Corriendo en puerto " + port);
 });
+

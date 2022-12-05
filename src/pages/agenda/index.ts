@@ -1,3 +1,5 @@
+import { state } from "../../state-manager";
+
 export function pageAgenda(container) {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -10,7 +12,7 @@ export function pageAgenda(container) {
       name="profesional"
       class="input-profesional"
       type="text"
-      placeholder="Apellido profesional"
+      placeholder="DNI profesional"
     />
 
 
@@ -77,7 +79,9 @@ export function pageAgenda(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
 
-    console.log("Agenda: ", value);
+    console.log("Desde agenda: ", value);
+    state.agregarTurnos(value);
+
   });
 
   const style = document.createElement("style");
