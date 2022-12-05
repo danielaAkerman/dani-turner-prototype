@@ -1,7 +1,9 @@
 import { db } from "./db";
 import map from "lodash/map"; // Para mapear un objeto de objetos
 
-const url = "http://localhost:3000";
+// const url = "http://localhost:3000";
+const url = "https://dani-turner.onrender.com";
+
 
 const state = {
   data: {
