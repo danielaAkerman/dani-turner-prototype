@@ -14,7 +14,7 @@
     "test": "ava",
     "build:api": "tsc",
     "build": "yarn build:front && yarn build:api",
-    "start": "node index.js"
+    "start": "node ./dist/index.js"
   },
   "dependencies": {
     "firebase-admin": "^11.3.0",

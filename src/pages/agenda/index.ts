@@ -72,7 +72,7 @@ export function pageAgenda(container) {
 
   const form = div.querySelector(".form");
 
-  form.addEventListener("submit", (e) => {
+  form!.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const target = e.target as any;
