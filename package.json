@@ -1,7 +1,6 @@
 {
   "name": "daniturner-prototipo",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "M. Daniela Robledo Akerman <danielaakerman14@gmail.com>",
   "license": "MIT",
   "devDependencies": {
