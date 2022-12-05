@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "M. Daniela Robledo Akerman <danielaakerman14@gmail.com>",
   "license": "MIT",
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "parcel": "^2.8.0"
   },
