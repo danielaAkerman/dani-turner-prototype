@@ -4,13 +4,18 @@ import map from "lodash/map"; // Para mapear un objeto de objetos
 // const url = "http://localhost:3000";
 const url = "https://dani-turner.onrender.com";
 
-
 const state = {
   data: {
     nombre: "",
     password: "",
     email: "",
     userId: "",
+    personaApellido: "",
+    personaNombre: "",
+    personaFechaNac: "",
+    personaTelefono:"",
+    personaDni:"",
+    personaTipo:"",
   },
 
   listeners: [],
@@ -73,40 +78,65 @@ const state = {
       });
   },
 
-verPersona(dni){
-  fetch(url + "/persons/" + dni )
-    .then((res) => {
-      return res.json();
+  verPersona(dni, datos) {
+    const currentState = this.getState();
+    fetch(url + "/persons/" + dni)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("La data es: ", data);
+        currentState.personaNombre = data.nombre;
+        currentState.personaApellido = data.apellido;
+        currentState.personaFechaNac = data['fecha-nac'];
+        currentState.personaTelefono = data.telefono;
+        currentState.personaDni = data.dni;
+        currentState.personaTipo = data.tipo;
+        datos!.innerHTML = `
+      <table>
+      <tr>
+        <th>ID</th>
+        <th>DNI</th>
+        <th>APELLIDO</th>
+        <th>NOMBRE</th>
+        <th>FECHA NAC</th>
+        <th>TELEFONO</th>
+        <th>TIPO</th>
+        <th>ACCIÓN</th>
+      </tr>
+  
+      <tr>
+        <th>44</th>
+        <th>${state.data.personaDni}</th>
+        <th>${state.data.personaApellido}</th>
+        <th>${state.data.personaNombre}</th>
+        <th>${state.data.personaFechaNac}</th>
+        <th>${state.data.personaTelefono}</th>
+        <th>${state.data.personaTipo}</th>
+        <th>X</th>
+      </tr>
+    </table>
+      `;
+      });
+    this.setState(currentState);
+  },
+
+  setAgenda(agenda) {
+    const profDni = agenda.profesional;
+
+    fetch(url + "/agenda/" + profDni, {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(agenda),
     })
-    .then((data) => {
-      console.log("La data es: ", data);
-
-
-    });
-},
-
-
-agregarTurnos(obj){
-  const profDni = obj.profesional
-  // const profDni = obj.profesional.toString()
-  fetch(url + "/agenda/" + profDni, {
-    method: "patch",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(obj),
-  })
-    //  .then((resp) => {
-    //    return resp.json();
-    //  })
-    //  .then((data) => {
-    //    console.log("Desde State: ", data);
-
-    //  });
-},
-
-
-
-
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Se creó el nuevo registro. ", data);
+      });
+  },
 };
 export { state };

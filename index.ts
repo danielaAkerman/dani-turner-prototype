@@ -28,12 +28,6 @@ const agendaCollection = db.collection("agenda");
 //   });
 // });
 
-app.get("/hola", (req, res) => {
-  res.json({
-    message: "hola soy el server",
-  });
-});
-
 // CREA UN REGISTRO NUEVO EN LA BASE DE DATOS
 // LO QUE OBTENGA POR REQ.BODY
 // DEVUELVE EL NUEVO ID
@@ -66,32 +60,27 @@ app.get("/persons/:dni", function (req, res) {
     });
 });
 
-
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
-app.patch("/users/:id", function (req, res) {
-  const userId = req.params.id;
-  const body = req.body;
-  body.lastAccess = new Date();
-  const userDoc = usersCollection.doc(userId);
-  userDoc.update(body).then((result) => {
-    res.json({ message: "ok" });
-  });
-});
-
+// app.patch("/users/:id", function (req, res) {
+//   const userId = req.params.id;
+//   const body = req.body;
+//   body.lastAccess = new Date();
+//   const userDoc = usersCollection.doc(userId);
+//   userDoc.update(body).then((result) => {
+//     res.json({ message: "ok" });
+//   });
+// });
 
 // PARA AGREGAR TURNOS
-// PARA FUNCIONAR, PRIMERO TIENE QUE EXISTIR ESE DOC, NO LO CREA
-// NO ANDA
-app.patch("/agenda/:dni", function (req, res) {
+// MODIFICA TODOS LOS CAMPOS
+app.post("/agenda/:dni", function (req, res) {
   const dniProfesional = req.params.dni;
-  const body = req.body;
   const newAgendaDoc = agendaCollection.doc(dniProfesional);
-  newAgendaDoc.update(body).then(() => {
-    res.json({ message: "ok" });
-  });
-});
 
+  newAgendaDoc.set(req.body).then(() => console.log(newAgendaDoc.id));
+  res.json({ message: "ok" });
+});
 
 // FUNCIONA PERFECTO:
 app.post("/login", function (req, res) {
@@ -216,4 +205,3 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log("Corriendo en puerto " + port);
 });
-
