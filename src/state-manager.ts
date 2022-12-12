@@ -1,5 +1,6 @@
 import { db } from "./db";
 import map from "lodash/map"; // Para mapear un objeto de objetos
+import { turnosFraccionamiento } from "./turnos";
 
 const url = "http://localhost:3000";
 // const url = "https://dani-turner.onrender.com";
@@ -142,9 +143,11 @@ const state = {
 
   generarTurnos(agenda) {
     const profDni = agenda.profesional;
-
-    
-
+    turnosFraccionamiento(
+      agenda.duracion,
+      agenda["in-lunes"],
+      agenda["out-lunes"]
+    );
   },
 };
 export { state };

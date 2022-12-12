@@ -1,10 +1,14 @@
-function turnosFraccionamiento() {
-  const duracion_turno = 20; //minutos
-  const inicio_disponibilidad: number = 630; // En minutos, 10:30 am
-  const fin_disponibilidad = 760; // En minutos, 12:40 mediodía
+export function turnosFraccionamiento(
+  duracion_turno: number,
+  inicio_disponibilidad: number,
+  fin_disponibilidad: number
+) {
+  // const duracion_turno = 20; //minutos
+  // const inicio_disponibilidad: number = 630; // En minutos, 10:30 am
+  // const fin_disponibilidad = 760; // En minutos, 12:40 mediodía
   const lapso_disponibilidad = fin_disponibilidad - inicio_disponibilidad; // 130 mins
   const cantidad_turnos = Math.trunc(lapso_disponibilidad / duracion_turno); // 6 turnos y sobran 10 minutos
-  const horarios_turnos:[] = [];
+  const horarios_turnos: string[] = [];
   var iteracion = 0;
   var horario_turno_actual: number = inicio_disponibilidad;
 
@@ -40,5 +44,3 @@ function turnosFraccionamiento() {
 
   return horarios_turnos;
 }
-
-turnosFraccionamiento();
