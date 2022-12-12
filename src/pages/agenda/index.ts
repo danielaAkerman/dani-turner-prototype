@@ -7,23 +7,43 @@ export function pageAgenda(container) {
 
   <form class="form">
 
-      <input
-      id="profesional"
-      name="profesional"
-      class="input-profesional"
-      type="text"
-      placeholder="DNI profesional"
-    />
+  <label for="profesional" class="label">DNI profesional:</label>
+  <input
+  id="profesional"
+  name="profesional"
+  class="input-profesional"
+  type="text"
+  />
 
-
+  <label for="duracion" class="label">Duración del turno en minutos:</label>
   <input
   id="duracion"
   name="duracion"
   class="input-duracion"
   type="text"
-  placeholder="Duración del turno en minutos"
   />
 
+  <label for="valido-desde" class="label">Válido desde:</label>
+  <input
+  id="valido-desde"
+  name="valido-desde"
+  class="input-valido-desde"
+  type="date"
+  placeholder="Válido desde"
+  />
+
+  <label for="valido-hasta" class="label">Válido hasta:</label>
+  <input
+  id="valido-hasta"
+  name="valido-hasta"
+  class="input-valido-hasta"
+  type="date"
+  placeholder="Válido hasta"
+  />
+
+  <hr>
+
+  <label class="label">Horarios de Ingreso y Egreso:</label>
   <table>
     <tr>
       <th></th>
@@ -62,9 +82,13 @@ export function pageAgenda(container) {
 
 
   <button class="button aceptar">ACEPTAR</button>
-
+  
   </form>
 
+  <br>
+  <button class="button nueva">AGREGAR NUEVA PLANILLA</button>
+
+  <div class="nueva-planilla">
   `;
 
   const form = div.querySelector(".form");
@@ -78,7 +102,17 @@ export function pageAgenda(container) {
 
     console.log("Desde agenda: ", value);
     state.setAgenda(value);
+  });
 
+  const nuevaPlanillaClick = div.querySelector(".nueva");
+  const nuevaPlanillaDiv = div.querySelector(".nueva-planilla");
+
+  nuevaPlanillaClick!.addEventListener("click", () => {
+    nuevaPlanillaDiv!.innerHTML = `
+
+    NUEVA PLANTILLA...
+
+    `;
   });
 
   const style = document.createElement("style");
@@ -87,8 +121,15 @@ export function pageAgenda(container) {
     border: none;
   }
 
-  .input-duracion{
+  .input-profesional,
+  .input-duracion, 
+  .input-valido-desde, 
+  .input-valido-hasta{
     width: 200px;
+  }
+
+  .nueva{
+    width: 300px;
   }
   `;
 

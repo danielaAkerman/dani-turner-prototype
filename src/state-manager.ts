@@ -1,8 +1,8 @@
 import { db } from "./db";
 import map from "lodash/map"; // Para mapear un objeto de objetos
 
-// const url = "http://localhost:3000";
-const url = "https://dani-turner.onrender.com";
+const url = "http://localhost:3000";
+// const url = "https://dani-turner.onrender.com";
 
 const state = {
   data: {
@@ -13,9 +13,9 @@ const state = {
     personaApellido: "",
     personaNombre: "",
     personaFechaNac: "",
-    personaTelefono:"",
-    personaDni:"",
-    personaTipo:"",
+    personaTelefono: "",
+    personaDni: "",
+    personaTipo: "",
   },
 
   listeners: [],
@@ -88,7 +88,7 @@ const state = {
         console.log("La data es: ", data);
         currentState.personaNombre = data.nombre;
         currentState.personaApellido = data.apellido;
-        currentState.personaFechaNac = data['fecha-nac'];
+        currentState.personaFechaNac = data["fecha-nac"];
         currentState.personaTelefono = data.telefono;
         currentState.personaDni = data.dni;
         currentState.personaTipo = data.tipo;
@@ -137,6 +137,14 @@ const state = {
       .then((data) => {
         console.log("Se creó el nuevo registro. ", data);
       });
+    this.generarTurnos(agenda);
+  },
+
+  generarTurnos(agenda) {
+    const profDni = agenda.profesional;
+
+    
+
   },
 };
 export { state };
