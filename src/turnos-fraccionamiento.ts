@@ -40,7 +40,8 @@ export function turnosFraccionamiento(
   //   );
   //   console.log("Cantidad de turnos: ", cantidad_turnos);
   //   console.log("Duracion del turno: ", duracion_turno);
-  //   console.log("Horarios de turnos: ", horarios_turnos);
+
+  console.log("Horarios de turnos: ", horarios_turnos);
 
   return horarios_turnos;
 }

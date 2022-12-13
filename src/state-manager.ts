@@ -1,6 +1,7 @@
 import { db } from "./db";
 import map from "lodash/map"; // Para mapear un objeto de objetos
-import { turnosFraccionamiento } from "./turnos";
+import { turnosFraccionamiento } from "./turnos-fraccionamiento";
+import { horarioAMinutos } from "./horario-a-minutos";
 
 const url = "http://localhost:3000";
 // const url = "https://dani-turner.onrender.com";
@@ -143,11 +144,38 @@ const state = {
 
   generarTurnos(agenda) {
     const profDni = agenda.profesional;
-    turnosFraccionamiento(
-      agenda.duracion,
-      agenda["in-lunes"],
-      agenda["out-lunes"]
-    );
+
+    const diasIn = [
+      "in-lunes",
+      "in-martes",
+      "in-mierc",
+      "in-juev",
+      "in-vier",
+      "in-sab",
+      "in-dom",
+    ];
+
+    const diasOut = [
+      "out-lunes",
+      "out-martes",
+      "out-mierc",
+      "out-juev",
+      "out-vier",
+      "out-sab",
+      "out-dom",
+    ];
+    var i = 0;
+    const arrayDeTurnos: any[] = [];
+    while (i < 7) {
+      const arrayParcial = turnosFraccionamiento(
+        parseInt(agenda.duracion),
+        horarioAMinutos(agenda["in-lunes"]),
+        horarioAMinutos(agenda["out-lunes"])
+      );
+      arrayDeTurnos.concat(arrayParcial);
+      i++;
+    }
+    console.log(arrayDeTurnos)
   },
 };
 export { state };
