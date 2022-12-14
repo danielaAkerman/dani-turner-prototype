@@ -72,7 +72,7 @@ app.get("/persons/:dni", function (req, res) {
 //   });
 // });
 
-// PARA AGREGAR TURNOS
+// PARA AGREGAR AGENDA
 // MODIFICA TODOS LOS CAMPOS
 app.post("/agenda/:dni", function (req, res) {
   const dniProfesional = req.params.dni;
@@ -80,6 +80,15 @@ app.post("/agenda/:dni", function (req, res) {
 
   newAgendaDoc.set(req.body).then(() => console.log(newAgendaDoc.id));
   res.json({ message: "ok" });
+});
+
+// CREA UN DOCUMENTO DE DETALLES DE TURNO
+// LO QUE OBTENGA POR REQ.BODY
+// DEVUELVE EL NUEVO ID
+app.post("/turnos-detalle", function (req, res) {
+  const nuevoTurno = turnosCollection.doc();
+  nuevoTurno.create(req.body).then((resp) => console.log(nuevoTurno.id));
+  res.json({ id: nuevoTurno.id });
 });
 
 // FUNCIONA PERFECTO:

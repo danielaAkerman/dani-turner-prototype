@@ -18,7 +18,7 @@ const state = {
     personaTelefono: "",
     personaDni: "",
     personaTipo: "",
-    arrayDeTurnos: []
+    arrayDeTurnos: [],
   },
 
   listeners: [],
@@ -171,20 +171,38 @@ const state = {
       const arrayParcial = turnosFraccionamiento(
         parseInt(agenda.duracion),
         horarioAMinutos(agenda[diasIn[i]]),
-        // horarioAMinutos(agenda["in-lunes"]),
-        // horarioAMinutos(agenda["out-lunes"])
         horarioAMinutos(agenda[diasOut[i]])
       );
       // arrayDeTurnos.concat(arrayParcial);
-      this.pushTurnos(arrayParcial)
       i++;
+      this.pushTurnos(profDni, arrayParcial);
     }
-    // console.log(arrayDeTurnos)
   },
-  pushTurnos(arrayParcial:string[]){
-    // var arrayDeTurnos: string[];
-    // this.arrayDeTurnos.concat(arrayParcial);
-    // console.log(this.arrayDeTurnos)
-  }
+  pushTurnos(profDni, turnos: string[]) {
+    // Enviar cada turno del listado a la DB, con el Dni del prof
+
+    for (const i of turnos) {
+      const turnosDetalle = {
+        profesional: profDni,
+        horario: i,
+        estado: "disponible",
+      };
+
+      fetch(url + "/turnos-detalle", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(turnosDetalle),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("Se creó el nuevo turno. ", data.horario);
+          // NO DEVUELVE EL DATO EN CONSOLA
+        });
+    }
+  },
 };
 export { state };
