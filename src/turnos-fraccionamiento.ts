@@ -13,13 +13,17 @@ export function turnosFraccionamiento(
   var horario_turno_actual: number = inicio_disponibilidad;
 
   horarios_turnos.push(
-    Math.trunc(inicio_disponibilidad / 60) + ":" + (horario_turno_actual % 60)
+    Math.trunc(inicio_disponibilidad / 60) +
+      ":" +
+      ("0" + (horario_turno_actual % 60)).slice(-2)
   );
 
   while (iteracion < cantidad_turnos - 1) {
     horario_turno_actual = horario_turno_actual + duracion_turno;
     horarios_turnos.push(
-      Math.trunc(horario_turno_actual / 60) + ":" + (horario_turno_actual % 60)
+      Math.trunc(horario_turno_actual / 60) +
+        ":" +
+        ("0" + (horario_turno_actual % 60)).slice(-2)
     );
     iteracion++;
   }

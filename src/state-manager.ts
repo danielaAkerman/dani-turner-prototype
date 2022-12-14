@@ -18,6 +18,7 @@ const state = {
     personaTelefono: "",
     personaDni: "",
     personaTipo: "",
+    arrayDeTurnos: []
   },
 
   listeners: [],
@@ -165,17 +166,25 @@ const state = {
       "out-dom",
     ];
     var i = 0;
-    const arrayDeTurnos: any[] = [];
+    // var arrayDeTurnos: any[] = [];
     while (i < 7) {
       const arrayParcial = turnosFraccionamiento(
         parseInt(agenda.duracion),
-        horarioAMinutos(agenda["in-lunes"]),
-        horarioAMinutos(agenda["out-lunes"])
+        horarioAMinutos(agenda[diasIn[i]]),
+        // horarioAMinutos(agenda["in-lunes"]),
+        // horarioAMinutos(agenda["out-lunes"])
+        horarioAMinutos(agenda[diasOut[i]])
       );
-      arrayDeTurnos.concat(arrayParcial);
+      // arrayDeTurnos.concat(arrayParcial);
+      this.pushTurnos(arrayParcial)
       i++;
     }
-    console.log(arrayDeTurnos)
+    // console.log(arrayDeTurnos)
   },
+  pushTurnos(arrayParcial:string[]){
+    // var arrayDeTurnos: string[];
+    // this.arrayDeTurnos.concat(arrayParcial);
+    // console.log(this.arrayDeTurnos)
+  }
 };
 export { state };

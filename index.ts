@@ -203,5 +203,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("Corriendo en http://localhost: " + port);
+  console.log("Corriendo en http://localhost:" + port);
 });
