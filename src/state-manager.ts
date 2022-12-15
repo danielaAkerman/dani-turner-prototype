@@ -145,6 +145,7 @@ const state = {
 
   generarTurnos(agenda) {
     const profDni = agenda.profesional;
+    const duracionTurno = parseInt(agenda.duracion);
 
     const diasIn = [
       "in-lunes",
@@ -165,17 +166,19 @@ const state = {
       "out-sab",
       "out-dom",
     ];
+
     var i = 0;
-    // var arrayDeTurnos: any[] = [];
     while (i < 7) {
-      const arrayParcial = turnosFraccionamiento(
-        parseInt(agenda.duracion),
-        horarioAMinutos(agenda[diasIn[i]]),
-        horarioAMinutos(agenda[diasOut[i]])
-      );
-      // arrayDeTurnos.concat(arrayParcial);
+      if (agenda[diasIn[i]]) {
+        const arrayParcial = turnosFraccionamiento(
+          duracionTurno,
+          horarioAMinutos(agenda[diasIn[i]]) || 0,
+          horarioAMinutos(agenda[diasOut[i]]) || 0
+        );
+        this.pushTurnos(profDni, arrayParcial);
+      }
+
       i++;
-      this.pushTurnos(profDni, arrayParcial);
     }
   },
   pushTurnos(profDni, turnos: string[]) {
@@ -199,8 +202,7 @@ const state = {
           return res.json();
         })
         .then((data) => {
-          console.log("Se creó el nuevo turno. ", data.horario);
-          // NO DEVUELVE EL DATO EN CONSOLA
+          console.log("Se creó el nuevo turno. ", data);
         });
     }
   },
