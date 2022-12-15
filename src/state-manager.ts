@@ -126,6 +126,8 @@ const state = {
 
   setAgenda(agenda) {
     const profDni = agenda.profesional;
+    // const fechaIn = agenda["valido-desde"]
+    // const fechaOut = agenda["valido-hasta"]
 
     fetch(url + "/agenda/" + profDni, {
       method: "post",
@@ -144,8 +146,12 @@ const state = {
   },
 
   generarTurnos(agenda) {
-    const profDni = agenda.profesional;
     const duracionTurno = parseInt(agenda.duracion);
+    const datosTurno = {
+      profDni: agenda.profesional,
+      fechaIn: agenda["valido-desde"],
+      fechaOut: agenda["valido-hasta"],
+    };
 
     const diasIn = [
       "in-lunes",
@@ -175,20 +181,22 @@ const state = {
           horarioAMinutos(agenda[diasIn[i]]) || 0,
           horarioAMinutos(agenda[diasOut[i]]) || 0
         );
-        this.pushTurnos(profDni, arrayParcial);
+        this.pushTurnos(datosTurno, arrayParcial);
       }
 
       i++;
     }
   },
-  pushTurnos(profDni, turnos: string[]) {
+  pushTurnos(datos, turnos: string[]) {
     // Enviar cada turno del listado a la DB, con el Dni del prof
 
     for (const i of turnos) {
       const turnosDetalle = {
-        profesional: profDni,
+        profesional: datos.profDni,
         horario: i,
         estado: "disponible",
+        desde: datos.fechaIn,
+        hasta: datos.fechaOut,
       };
 
       fetch(url + "/turnos-detalle", {
