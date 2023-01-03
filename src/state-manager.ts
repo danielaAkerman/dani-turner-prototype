@@ -2,6 +2,7 @@ import { db } from "./db";
 import map from "lodash/map"; // Para mapear un objeto de objetos
 import { turnosFraccionamiento } from "./turnos-fraccionamiento";
 import { horarioAMinutos } from "./horario-a-minutos";
+import { fechas } from "./fechas";
 
 const url = "http://localhost:3000";
 // const url = "https://dani-turner.onrender.com";
@@ -147,41 +148,61 @@ const state = {
 
   generarTurnos(agenda) {
     const duracionTurno = parseInt(agenda.duracion);
-    const datosTurno = {
-      profDni: agenda.profesional,
-      fechaIn: agenda["valido-desde"],
-      fechaOut: agenda["valido-hasta"],
-    };
+    // const datosTurno = {
+    //   profDni: agenda.profesional,
+    //   fechaIn: agenda["valido-desde"],
+    //   fechaOut: agenda["valido-hasta"],
+    // };
 
     const diasIn = [
+      "in-dom",
       "in-lunes",
       "in-martes",
       "in-mierc",
       "in-juev",
       "in-vier",
       "in-sab",
-      "in-dom",
     ];
 
     const diasOut = [
+      "out-dom",
       "out-lunes",
       "out-martes",
       "out-mierc",
       "out-juev",
       "out-vier",
       "out-sab",
-      "out-dom",
     ];
 
     var i = 0;
     while (i < 7) {
       if (agenda[diasIn[i]]) {
-        const arrayParcial = turnosFraccionamiento(
+        const horariosTurnosDia = turnosFraccionamiento(
           duracionTurno,
-          horarioAMinutos(agenda[diasIn[i]]) || 0,
-          horarioAMinutos(agenda[diasOut[i]]) || 0
+          horarioAMinutos(agenda[diasIn[i]]),
+          horarioAMinutos(agenda[diasOut[i]])
         );
-        this.pushTurnos(datosTurno, arrayParcial);
+        const fechasDias_i = fechas(
+          agenda["valido-desde"],
+          agenda["valido-hasta"],
+          i
+        );
+        const turnosCompletos: Object[] = [];
+        for (const f of fechasDias_i) {
+          for (const h of horariosTurnosDia!) {
+            const datosTurno = {
+              profDni: agenda.profesional,
+              fecha: f,
+              horario: h,
+              estado: "Disponible",
+              paciente: "",
+            };
+            turnosCompletos.push(datosTurno);
+          }
+        }
+        console.log("LOS TURNOS SON:", turnosCompletos);
+        
+        // this.pushTurnos(turnosCompletos);
       }
 
       i++;

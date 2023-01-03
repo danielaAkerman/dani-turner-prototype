@@ -47,35 +47,35 @@ export function pageAgenda(container) {
   <table>
     <tr>
       <th></th>
+      <th>DOMINGO</th>
       <th>LUNES</th>
       <th>MARTES</th>
       <th>MIERCOLES</th>
       <th>JUEVES</th>
       <th>VIERNES</th>
       <th>SABADO</th>
-      <th>DOMINGO</th>
     </tr>
 
     <tr>
       <th>IN</th>
+      <th><input name="in-dom" class="input time in-dom" type="time" /></th>
       <th><input name="in-lunes" class="input time in-lunes" type="time" /></th>
       <th><input name="in-martes" class="input time in-martes" type="time" /></th>
       <th><input name="in-mierc" class="input time in-mierc" type="time" /></th>
       <th><input name="in-juev" class="input time in-juev" type="time" /></th>
       <th><input name="in-vier" class="input time in-vier" type="time" /></th>
       <th><input name="in-sab" class="input time in-sab" type="time" /></th>
-      <th><input name="in-dom" class="input time in-dom" type="time" /></th>
     </tr>
 
     <tr>
       <th>OUT</th>
+      <th><input name="out-dom" class="input time out-dom" type="time" /></th>
       <th><input name="out-lunes" class="input time out-lunes" type="time" /></th>
       <th><input name="out-martes" class="input time out-martes" type="time" /></th>
       <th><input name="out-mierc" class="input time out-mierc" type="time" /></th>
       <th><input name="out-juev" class="input time out-juev" type="time" /></th>
       <th><input name="out-vier" class="input time out-vier" type="time" /></th>
       <th><input name="out-sab" class="input time out-sab" type="time" /></th>
-      <th><input name="out-dom" class="input time out-dom" type="time" /></th>
     </tr>
   </table>
   
