@@ -148,11 +148,6 @@ const state = {
 
   generarTurnos(agenda) {
     const duracionTurno = parseInt(agenda.duracion);
-    // const datosTurno = {
-    //   profDni: agenda.profesional,
-    //   fechaIn: agenda["valido-desde"],
-    //   fechaOut: agenda["valido-hasta"],
-    // };
 
     const diasIn = [
       "in-dom",
@@ -201,39 +196,72 @@ const state = {
           }
         }
         console.log("LOS TURNOS SON:", turnosCompletos);
-        
-        // this.pushTurnos(turnosCompletos);
+
+        this.pushTurnos(turnosCompletos);
       }
 
       i++;
     }
   },
-  pushTurnos(datos, turnos: string[]) {
-    // Enviar cada turno del listado a la DB, con el Dni del prof
-
-    for (const i of turnos) {
-      const turnosDetalle = {
-        profesional: datos.profDni,
-        horario: i,
-        estado: "disponible",
-        desde: datos.fechaIn,
-        hasta: datos.fechaOut,
-      };
-
+  pushTurnos(turnosCompletos) {
+    for (const t of turnosCompletos) {
       fetch(url + "/turnos-detalle", {
         method: "post",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(turnosDetalle),
+        body: JSON.stringify(t),
       })
         .then((res) => {
           return res.json();
         })
         .then((data) => {
-          console.log("Se creó el nuevo turno. ", data);
+          console.log("Se creó el registro ", data);
         });
     }
   },
+
+  verTurnos(profDni, datos){
+    const currentState = this.getState();
+    fetch(url + "/turnos/" + profDni)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("La data es: ", data);
+        // profDni: agenda.profesional,
+        // fecha: f,
+        // horario: h,
+        // estado: "Disponible",
+        // paciente: "",
+
+// for (const d of data) {
+// `  <tr>
+//   <th>44</th>
+//   <th>${d.profDni}</th>
+//   <th>${d.fecha}</th>
+//   <th>${d.horario}</th>
+//   <th>${d.estado}</th>
+//   <th>${d.paciente}</th>
+//   <th>X</th>
+// </tr>`
+// }
+        datos!.innerHTML = `
+      <table>
+      <tr>
+        <th>ID</th>
+        <th>DNI prof</th>
+        <th>Fecha</th>
+        <th>Horario</th>
+        <th>Estado</th>
+        <th>Paciente</th>
+        <th>ACCIÓN</th>
+      </tr>
+   
+    </table>
+      `;
+      });
+  },
 };
+
 export { state };

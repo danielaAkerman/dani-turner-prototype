@@ -60,6 +60,22 @@ app.get("/persons/:dni", function (req, res) {
     });
 });
 
+// PARA VER TURNOS
+app.get("/turnos/:profDni", function (req, res) {
+  const { profDni } = req.params;
+  turnosCollection
+    .where("profDni", "==", profDni)
+    .get()
+    .then((snap) => {
+      const datas = [];
+      const snapDocs = snap.docs;
+      for (const d of snapDocs) {
+        datas.push(d.data());
+      }
+      res.json(datas);
+    });
+});
+
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
 // app.patch("/users/:id", function (req, res) {

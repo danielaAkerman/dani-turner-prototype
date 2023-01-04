@@ -110,7 +110,7 @@ export function pageAgenda(container) {
   nuevaPlanillaClick!.addEventListener("click", () => {
     nuevaPlanillaDiv!.innerHTML = `
 
-    NUEVA PLANTILLA...
+    NUEVA PLANILLA...
 
     `;
   });

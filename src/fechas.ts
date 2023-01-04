@@ -6,23 +6,37 @@
 // console.log("numero", fecha.getDate());
 // console.log("mes", fecha.getMonth());
 // console.log("año", fecha.getFullYear());
+const dia_semana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 export function fechas(inicio: string, fin: string, dia: number) {
   // PRE: Recibe un lapso de tiempo definido por dos fechas, y un día de la semana
   // POST: Devuelve las fechas de ese lapso que coincidan con ese día de la semana
 
-  const fecha_inicial = new Date(inicio);
-  const fecha_final = new Date(fin);
   const dia_epoch = 86400000;
+  const tres_hs_epoch = dia_epoch / 8;
+  const fecha_inicial = new Date(inicio).getTime() + tres_hs_epoch; // en epoch
+  const fecha_final = new Date(fin).getTime() + tres_hs_epoch; // en epoch
   const dia_laborable = dia;
-  const fechas: Date[] = [];
+  const fechas: string[] = [];
   var fecha_actual = fecha_inicial;
 
-  while (fecha_actual.getTime() <= fecha_final.getTime() + dia_epoch) {
-    if (fecha_actual.getDay() == dia_laborable) {
-      fechas.push(fecha_actual);
+  while (fecha_actual <= fecha_final) {
+    if (new Date(fecha_actual).getDay() == dia_laborable) {
+      const fecha_actual_date = new Date(fecha_actual);
+      const fecha_formato: string =
+        dia_semana[
+          fecha_actual_date.getDay()] +
+            " " +
+            fecha_actual_date.getFullYear() +
+            "-" +
+            (fecha_actual_date.getMonth() + 1) +
+            "-" +
+            fecha_actual_date.getDate()
+        ;
+
+      fechas.push(fecha_formato);
     }
-    fecha_actual = new Date(fecha_actual.getTime() + dia_epoch);
+    fecha_actual = fecha_actual + dia_epoch;
   }
   console.log(fechas);
   return fechas;

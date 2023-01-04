@@ -1,3 +1,5 @@
+import { state } from "../../state-manager";
+
 export function pageTurnosVer(container) {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -41,6 +43,8 @@ export function pageTurnosVer(container) {
 
   <form>
 
+  <div class="datos"><div>
+
   <table class="table">
       <tr>
         <th>CENTRO</th>
@@ -57,7 +61,17 @@ export function pageTurnosVer(container) {
   
  
   `;
+  const form = div.querySelector(".form");
+  var datos = div.querySelector(".datos");
+  form!.addEventListener("submit", (e) => {
+    e.preventDefault();
 
+    const target = e.target as any;
+    const data = new FormData(target);
+    const value = Object.fromEntries(data.entries());
+
+    state.verTurnos(value.profesional, datos);
+  });
  
   const style = document.createElement("style");
   style.textContent = `
