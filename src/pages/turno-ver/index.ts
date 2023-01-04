@@ -43,22 +43,38 @@ export function pageTurnosVer(container) {
 
   <form>
 
-  <div class="datos"><div>
+
 
   <table class="table">
       <tr>
-        <th>CENTRO</th>
-        <th>ESPECIALIDAD</th>
+        <th>ID</th>
         <th>PROFESIONAL</th>
-        <th>PACIENTE</th>
         <th>DIA</th>
         <th>HORA</th>
+        <th>estado</th>
+        <th>PACIENTE</th>
         <th>SELECC</th>
       </tr>
+  </table>
   
+  <div class="datos">
+  <div class="results" id="results"></div>
 
+  <template id="template">
+    <table class="table">
+    <tr>
+      <th class="id">ID</th>
+      <th class="dniprof">DNI prof</th>
+      <th class="fecha">Fecha</th>
+      <th class="horario">Horario</th>
+      <th class="estado">Estado</th>
+      <th class="paciente">Paciente</th>
+      <th>x</th>
+    </tr>
     </table>
-  
+  </template>
+  <div>
+      
  
   `;
   const form = div.querySelector(".form");
@@ -78,6 +94,9 @@ export function pageTurnosVer(container) {
   .titulo{
     font-size: 58px;
     text-align: center;
+  }
+  table{
+    width: 100%;
   }
 `;
   div.appendChild(style);

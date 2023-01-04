@@ -221,7 +221,7 @@ const state = {
     }
   },
 
-  verTurnos(profDni, datos){
+  verTurnos(profDni, datos) {
     const currentState = this.getState();
     fetch(url + "/turnos/" + profDni)
       .then((res) => {
@@ -229,38 +229,50 @@ const state = {
       })
       .then((data) => {
         console.log("La data es: ", data);
-        // profDni: agenda.profesional,
-        // fecha: f,
-        // horario: h,
-        // estado: "Disponible",
-        // paciente: "",
+        mostrarResultados(data);
 
-// for (const d of data) {
-// `  <tr>
-//   <th>44</th>
-//   <th>${d.profDni}</th>
-//   <th>${d.fecha}</th>
-//   <th>${d.horario}</th>
-//   <th>${d.estado}</th>
-//   <th>${d.paciente}</th>
-//   <th>X</th>
-// </tr>`
-// }
-        datos!.innerHTML = `
-      <table>
-      <tr>
-        <th>ID</th>
-        <th>DNI prof</th>
-        <th>Fecha</th>
-        <th>Horario</th>
-        <th>Estado</th>
-        <th>Paciente</th>
-        <th>ACCIÓN</th>
-      </tr>
-   
-    </table>
-      `;
+       
       });
+
+    function mostrarResultados(data) {
+      const contenedor = datos.querySelector("#results");
+      const template = datos.querySelector("#template");
+
+      contenedor.replaceChildren();
+      for (const d of data) {
+        const id = template.content.querySelector(".id");
+        id.textContent = 55;
+
+        const dniprof = template.content.querySelector(".dniprof");
+        dniprof.textContent = d.profDni;
+
+        const fecha = template.content.querySelector(".fecha");
+        fecha.textContent = d.fecha;
+
+        const horario = template.content.querySelector(".horario");
+        horario.textContent = d.horario;
+
+        const estado = template.content.querySelector(".estado");
+        estado.textContent = d.estado;
+
+        const paciente = template.content.querySelector(".paciente");
+        paciente.textContent = d.paciente;
+
+        const clone = document.importNode(template.content, true);
+
+        contenedor.appendChild(clone);
+
+        // `  <tr>
+        //   <th>44</th>
+        //   <th>${d.profDni}</th>
+        //   <th>${d.fecha}</th>
+        //   <th>${d.horario}</th>
+        //   <th>${d.estado}</th>
+        //   <th>${d.paciente}</th>
+        //   <th>X</th>
+        // </tr>`
+      }
+    }
   },
 };
 
