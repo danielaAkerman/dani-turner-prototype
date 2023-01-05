@@ -1,11 +1,12 @@
-import { db } from "./db";
-import map from "lodash/map"; // Para mapear un objeto de objetos
+// import { db } from "./db";
+// import map from "lodash/map"; // Para mapear un objeto de objetos
 import { turnosFraccionamiento } from "./turnos-fraccionamiento";
 import { horarioAMinutos } from "./horario-a-minutos";
 import { fechas } from "./fechas";
 
-const url = "http://localhost:3000";
+// const url = "http://localhost:3000";
 // const url = "https://dani-turner.onrender.com";
+const url = process.env.url;
 
 const state = {
   data: {
