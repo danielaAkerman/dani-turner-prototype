@@ -13,6 +13,7 @@ app.use(json());
 
 const usersCollection = db.collection("users");
 const prestadoresCollection = db.collection("prestadores");
+const clientesCollection = db.collection("clientes");
 const turnosCollection = db.collection("turnos");
 const agendaCollection = db.collection("agenda");
 
@@ -52,6 +53,18 @@ app.get("/users/:id", function (req, res) {
 app.get("/prestador/:dni", function (req, res) {
   const { dni } = req.params;
   prestadoresCollection
+    .where("dni", "==", dni)
+    .get()
+    .then((snap) => {
+      const snapData = snap.docs[0].data();
+      res.json(snapData);
+    });
+});
+
+// PARA VER PERSONA
+app.get("/cliente/:dni", function (req, res) {
+  const { dni } = req.params;
+  clientesCollection
     .where("dni", "==", dni)
     .get()
     .then((snap) => {
@@ -151,6 +164,13 @@ app.post("/nuevoprestador", function (req, res) {
   nuevoPrestador.create(req.body).then(() => console.log(nuevoPrestador.id));
   res.json({ id: nuevoPrestador.id }); // Lo está devolviendo bien?
 });
+
+app.post("/nuevocliente", function (req, res) {
+  const nuevoCliente = clientesCollection.doc();
+  nuevoCliente.create(req.body).then(() => console.log(nuevoCliente.id));
+  res.json({ id: nuevoCliente.id }); // Lo está devolviendo bien?
+});
+
 
 // app.post("/rooms", (req, res) => {
 //   const { userId } = req.body;

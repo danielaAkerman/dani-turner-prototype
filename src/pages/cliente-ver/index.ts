@@ -1,9 +1,9 @@
 import { state } from "../../state-manager";
 
-export function pagePersonaVer(container) {
+export function pageClienteVer(container) {
   const div = document.createElement("div");
   div.innerHTML = `
-  <h2>VER PRESTADORES</h2>
+  <h2>VER CLIENTES</h2>
 
   <form class="form">
 
@@ -31,7 +31,7 @@ export function pagePersonaVer(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
     const dni = value.dni;
-    state.verPrestador(dni, datos);
+    state.verCliente(dni, datos);
 
 
   });

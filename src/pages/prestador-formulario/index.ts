@@ -1,6 +1,6 @@
 import {state} from "../../state-manager"
 
-export function pagePersonaFormulario(container) {
+export function pagePrestadorFormulario(container) {
   const div = document.createElement("div");
   div.innerHTML = `
   <h2>NUEVO PRESTADOR</h2>

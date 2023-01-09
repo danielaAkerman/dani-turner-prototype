@@ -85,6 +85,25 @@ const state = {
         });
   },
 
+  nuevoCliente(persona, root) {
+    (persona.shortId = uuidv4().slice(0, 7).toUpperCase()),
+      fetch(url + "/nuevocliente", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(persona),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("Se registro el nuevo cliente. ", data);
+          // NO DEVUELVE EL ID, NO SÉ POR QUE
+          root.goTo("/dashboard");
+        });
+  },
+
   verPrestador(dni, datos) {
     const currentState = this.getState();
     fetch(url + "/prestador/" + dni)
@@ -124,6 +143,49 @@ const state = {
       });
     this.setState(currentState);
   },
+
+  verCliente(dni, datos) {
+    const currentState = this.getState();
+    fetch(url + "/cliente/" + dni)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("La data es: ", data);
+        // currentState.prestadorNombre = data.nombre;
+        // currentState.prestadorApellido = data.apellido;
+        // currentState.prestadorFechaNac = data["fecha-nac"];
+        // currentState.prestadorTelefono = data.telefono;
+        // currentState.prestadorDni = data.dni;
+        datos!.innerHTML = `
+      <table>
+      <tr>
+        <th>ID</th>
+        <th>DNI</th>
+        <th>APELLIDO</th>
+        <th>NOMBRE</th>
+        <th>FECHA NAC</th>
+        <th>TELEFONO</th>
+        <th>ACCIÓN</th>
+      </tr>
+  
+      <tr>
+        <th>${data.shortId}</th>
+        <th>${data.dni}</th>
+        <th>${data.apellido}</th>
+        <th>${data.nombre}</th>
+        <th>${data["fecha-nac"]}</th>
+        <th>${data.telefono}</th>
+        <th>X</th>
+      </tr>
+    </table>
+      `;
+      });
+    this.setState(currentState);
+  },
+
+
+
 
   setAgenda(agenda) {
     const profDni = agenda.prestador;

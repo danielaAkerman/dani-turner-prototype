@@ -100,7 +100,6 @@ export function pageAgenda(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
 
-    console.log("Desde agenda: ", value);
     state.setAgenda(value);
   });
 

@@ -6,8 +6,10 @@ export function pageDashboard(container) {
 
   <div class="buttons">
   <button class="button agenda">AGENDA PRESTADORES</button>
-  <button class="button nuevapersona">NUEV0 PRESTADOR</button>
-  <button class="button verpersona">VER PRESTADOR</button>
+  <button class="button nuevoPrestador">NUEV0 PRESTADOR</button>
+  <button class="button verPrestador">VER PRESTADOR</button>
+  <button class="button nuevoCliente">NUEV0 CLIENTE</button>
+  <button class="button verCliente">VER CLIENTE</button>
   <button class="button nuevoturno">ASIGNAR NUEVO TURNO</button>
   <button class="button verturno">VER TURNO</button>
   </div>
@@ -18,14 +20,24 @@ export function pageDashboard(container) {
     container.goTo("/agenda");
   });
 
-  const nuevapersona = div.querySelector(".nuevapersona");
-  nuevapersona!.addEventListener("click", () => {
-    container.goTo("/persona-formulario");
+  const nuevoPrestador = div.querySelector(".nuevoPrestador");
+  nuevoPrestador!.addEventListener("click", () => {
+    container.goTo("/prestador-formulario");
   });
 
-  const verpersona = div.querySelector(".verpersona");
-  verpersona!.addEventListener("click", () => {
-    container.goTo("/persona-ver");
+  const verPrestador = div.querySelector(".verPrestador");
+  verPrestador!.addEventListener("click", () => {
+    container.goTo("/prestador-ver");
+  });
+
+  const nuevoCliente = div.querySelector(".nuevoCliente");
+  nuevoCliente!.addEventListener("click", () => {
+    container.goTo("/cliente-formulario");
+  });
+
+  const verCliente = div.querySelector(".verCliente");
+  verCliente!.addEventListener("click", () => {
+    container.goTo("/cliente-ver");
   });
 
   const nuevoturno = div.querySelector(".nuevoturno");

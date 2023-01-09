@@ -1,8 +1,10 @@
 import { pageLogin } from "./pages/log-in";
 import { pageDashboard } from "./pages/dashboard";
 import { pageAgenda } from "./pages/agenda";
-import { pagePersonaFormulario } from "./pages/persona-formulario";
-import { pagePersonaVer } from "./pages/persona-ver";
+import { pagePrestadorFormulario } from "./pages/prestador-formulario";
+import { pagePrestadorVer } from "./pages/prestador-ver";
+import { pageClienteFormulario } from "./pages/cliente-formulario";
+import { pageClienteVer } from "./pages/cliente-ver";
 import { pageTurnosReservar } from "./pages/turno-reservar";
 import { pageTurnosVer } from "./pages/turno-ver";
 
@@ -24,12 +26,20 @@ const routes = [
     handler: pageAgenda,
   },
   {
-    path: /\/persona-formulario/,
-    handler: pagePersonaFormulario,
+    path: /\/prestador-formulario/,
+    handler: pagePrestadorFormulario,
   },
   {
-    path: /\/persona-ver/,
-    handler: pagePersonaVer,
+    path: /\/prestador-ver/,
+    handler: pagePrestadorVer,
+  },
+  {
+    path: /\/cliente-formulario/,
+    handler: pageClienteFormulario,
+  },
+  {
+    path: /\/cliente-ver/,
+    handler: pageClienteVer,
   },
   {
     path: /\/turno-reservar/,
