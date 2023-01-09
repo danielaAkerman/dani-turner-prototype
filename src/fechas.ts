@@ -6,7 +6,16 @@
 // console.log("numero", fecha.getDate());
 // console.log("mes", fecha.getMonth());
 // console.log("año", fecha.getFullYear());
-const dia_semana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+const dia_semana = [
+  "Domingo",
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado",
+];
 
 export function fechas(inicio: string, fin: string, dia: number) {
   // PRE: Recibe un lapso de tiempo definido por dos fechas, y un día de la semana
@@ -24,16 +33,13 @@ export function fechas(inicio: string, fin: string, dia: number) {
     if (new Date(fecha_actual).getDay() == dia_laborable) {
       const fecha_actual_date = new Date(fecha_actual);
       const fecha_formato: string =
-        dia_semana[
-          fecha_actual_date.getDay()] +
-            " " +
-            fecha_actual_date.getFullYear() +
-            "-" +
-            (fecha_actual_date.getMonth() + 1) +
-            "-" +
-            fecha_actual_date.getDate()
-        ;
-
+        dia_semana[fecha_actual_date.getDay()] +
+        " " +
+        fecha_actual_date.getDate() +
+        "-"+
+        (fecha_actual_date.getMonth() + 1) +
+        "-" +
+        fecha_actual_date.getFullYear() ;
       fechas.push(fecha_formato);
     }
     fecha_actual = fecha_actual + dia_epoch;

@@ -3,7 +3,7 @@ import {state} from "../../state-manager"
 export function pagePersonaFormulario(container) {
   const div = document.createElement("div");
   div.innerHTML = `
-  <h2>NUEVA PERSONA</h2>
+  <h2>NUEVO PRESTADOR</h2>
   <form class="form">
 
   <input id="dni" name="dni" class="input-dni" placeholder="dni" type="text" />
@@ -26,12 +26,6 @@ export function pagePersonaFormulario(container) {
       placeholder="telefono" type="text"
     />
 
-  <select id="tipo" name="tipo" class="input-tipo" type="text">
-      <option value="null"></option>
-      <option value="profesional">Profesional</option>
-      <option value="paciente">Paciente</option>
-    </select>
-
   <button class="button">ACEPTAR</button>
   </form>
  
@@ -45,7 +39,8 @@ export function pagePersonaFormulario(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
 
-    state.nuevaPersona(value, container)
+    console.log(value)
+    state.nuevoPrestador(value, container)
    
   });
 

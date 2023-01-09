@@ -1,5 +1,6 @@
 // import { db } from "./db";
 // import map from "lodash/map"; // Para mapear un objeto de objetos
+import { v4 as uuidv4 } from "uuid";
 import { turnosFraccionamiento } from "./turnos-fraccionamiento";
 import { horarioAMinutos } from "./horario-a-minutos";
 import { fechas } from "./fechas";
@@ -14,12 +15,12 @@ const state = {
     password: "",
     email: "",
     userId: "",
-    personaApellido: "",
-    personaNombre: "",
-    personaFechaNac: "",
-    personaTelefono: "",
-    personaDni: "",
-    personaTipo: "",
+    prestadorApellido: "",
+    prestadorNombre: "",
+    prestadorFechaNac: "",
+    prestadorTelefono: "",
+    prestadorDni: "",
+
     arrayDeTurnos: [],
   },
 
@@ -65,38 +66,38 @@ const state = {
     this.setState(currentState);
   },
 
-  nuevaPersona(persona, root) {
-    fetch(url + "/newperson", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(persona),
-    })
-      .then((res) => {
-        return res.json();
+  nuevoPrestador(persona, root) {
+    (persona.shortId = uuidv4().slice(0, 7).toUpperCase()),
+      fetch(url + "/nuevoprestador", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(persona),
       })
-      .then((data) => {
-        console.log("Se creó el nuevo registro. ", data);
-        // NO DEVUELVE EL ID, NO SÉ POR QUE
-        root.goTo("/dashboard");
-      });
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("Se registro el nuevo prestador. ", data);
+          // NO DEVUELVE EL ID, NO SÉ POR QUE
+          root.goTo("/dashboard");
+        });
   },
 
-  verPersona(dni, datos) {
+  verPrestador(dni, datos) {
     const currentState = this.getState();
-    fetch(url + "/persons/" + dni)
+    fetch(url + "/prestador/" + dni)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         console.log("La data es: ", data);
-        currentState.personaNombre = data.nombre;
-        currentState.personaApellido = data.apellido;
-        currentState.personaFechaNac = data["fecha-nac"];
-        currentState.personaTelefono = data.telefono;
-        currentState.personaDni = data.dni;
-        currentState.personaTipo = data.tipo;
+        // currentState.prestadorNombre = data.nombre;
+        // currentState.prestadorApellido = data.apellido;
+        // currentState.prestadorFechaNac = data["fecha-nac"];
+        // currentState.prestadorTelefono = data.telefono;
+        // currentState.prestadorDni = data.dni;
         datos!.innerHTML = `
       <table>
       <tr>
@@ -106,18 +107,16 @@ const state = {
         <th>NOMBRE</th>
         <th>FECHA NAC</th>
         <th>TELEFONO</th>
-        <th>TIPO</th>
         <th>ACCIÓN</th>
       </tr>
   
       <tr>
-        <th>44</th>
-        <th>${state.data.personaDni}</th>
-        <th>${state.data.personaApellido}</th>
-        <th>${state.data.personaNombre}</th>
-        <th>${state.data.personaFechaNac}</th>
-        <th>${state.data.personaTelefono}</th>
-        <th>${state.data.personaTipo}</th>
+        <th>${data.shortId}</th>
+        <th>${data.dni}</th>
+        <th>${data.apellido}</th>
+        <th>${data.nombre}</th>
+        <th>${data["fecha-nac"]}</th>
+        <th>${data.telefono}</th>
         <th>X</th>
       </tr>
     </table>
@@ -127,7 +126,7 @@ const state = {
   },
 
   setAgenda(agenda) {
-    const profDni = agenda.profesional;
+    const profDni = agenda.prestador;
     // const fechaIn = agenda["valido-desde"]
     // const fechaOut = agenda["valido-hasta"]
 
@@ -187,7 +186,8 @@ const state = {
         for (const f of fechasDias_i) {
           for (const h of horariosTurnosDia!) {
             const datosTurno = {
-              profDni: agenda.profesional,
+              shortId: uuidv4().slice(0, 7).toUpperCase(),
+              profDni: agenda.prestador,
               fecha: f,
               horario: h,
               estado: "Disponible",
@@ -231,8 +231,6 @@ const state = {
       .then((data) => {
         console.log("La data es: ", data);
         mostrarResultados(data);
-
-       
       });
 
     function mostrarResultados(data) {
@@ -242,7 +240,7 @@ const state = {
       contenedor.replaceChildren();
       for (const d of data) {
         const id = template.content.querySelector(".id");
-        id.textContent = 55;
+        id.textContent = d.shortId;
 
         const dniprof = template.content.querySelector(".dniprof");
         dniprof.textContent = d.profDni;

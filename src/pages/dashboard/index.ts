@@ -5,36 +5,36 @@ export function pageDashboard(container) {
   <h2>DASHBOARD</h2>
 
   <div class="buttons">
-  <button class="button agenda">AGENDA</button>
-  <button class="button nuevapersona">NUEVA PERSONA</button>
-  <button class="button verpersona">VER PERSONA</button>
-  <button class="button nuevoturno">NUEVO TURNO</button>
+  <button class="button agenda">AGENDA PRESTADORES</button>
+  <button class="button nuevapersona">NUEV0 PRESTADOR</button>
+  <button class="button verpersona">VER PRESTADOR</button>
+  <button class="button nuevoturno">ASIGNAR NUEVO TURNO</button>
   <button class="button verturno">VER TURNO</button>
   </div>
   `;
 
   const agenda = div.querySelector(".agenda");
-  agenda.addEventListener("click", () => {
+  agenda!.addEventListener("click", () => {
     container.goTo("/agenda");
   });
 
   const nuevapersona = div.querySelector(".nuevapersona");
-  nuevapersona.addEventListener("click", () => {
+  nuevapersona!.addEventListener("click", () => {
     container.goTo("/persona-formulario");
   });
 
   const verpersona = div.querySelector(".verpersona");
-  verpersona.addEventListener("click", () => {
+  verpersona!.addEventListener("click", () => {
     container.goTo("/persona-ver");
   });
 
   const nuevoturno = div.querySelector(".nuevoturno");
-  nuevoturno.addEventListener("click", () => {
+  nuevoturno!.addEventListener("click", () => {
     container.goTo("/turno-reservar");
   });
 
   const verturno = div.querySelector(".verturno");
-  verturno.addEventListener("click", () => {
+  verturno!.addEventListener("click", () => {
     container.goTo("/turno-ver");
   });
 

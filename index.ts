@@ -12,7 +12,7 @@ app.use(cors());
 app.use(json());
 
 const usersCollection = db.collection("users");
-const personsCollection = db.collection("persons");
+const prestadoresCollection = db.collection("prestadores");
 const turnosCollection = db.collection("turnos");
 const agendaCollection = db.collection("agenda");
 
@@ -49,9 +49,9 @@ app.get("/users/:id", function (req, res) {
 });
 
 // PARA VER PERSONA
-app.get("/persons/:dni", function (req, res) {
+app.get("/prestador/:dni", function (req, res) {
   const { dni } = req.params;
-  personsCollection
+  prestadoresCollection
     .where("dni", "==", dni)
     .get()
     .then((snap) => {
@@ -146,10 +146,10 @@ app.post("/login", function (req, res) {
 // CREA UN REGISTRO NUEVO EN LA BASE DE DATOS
 // LO QUE OBTENGA POR REQ.BODY
 // DEVUELVE EL NUEVO ID
-app.post("/newperson", function (req, res) {
-  const newperson = personsCollection.doc();
-  newperson.create(req.body).then(() => console.log(newperson.id));
-  res.json({ id: newperson.id }); // Lo está devolviendo bien?
+app.post("/nuevoprestador", function (req, res) {
+  const nuevoPrestador = prestadoresCollection.doc();
+  nuevoPrestador.create(req.body).then(() => console.log(nuevoPrestador.id));
+  res.json({ id: nuevoPrestador.id }); // Lo está devolviendo bien?
 });
 
 // app.post("/rooms", (req, res) => {

@@ -3,15 +3,15 @@ import { state } from "../../state-manager";
 export function pageAgenda(container) {
   const div = document.createElement("div");
   div.innerHTML = `
-  <h2>AGENDA PROFESIONALES</h2>
+  <h2>AGENDA PRESTADORES</h2>
 
   <form class="form">
 
-  <label for="profesional" class="label">DNI profesional:</label>
+  <label for="prestador" class="label">DNI prestador:</label>
   <input
-  id="profesional"
-  name="profesional"
-  class="input-profesional"
+  id="prestador"
+  name="prestador"
+  class="input-prestador"
   type="text"
   />
 
@@ -121,7 +121,7 @@ export function pageAgenda(container) {
     border: none;
   }
 
-  .input-profesional,
+  .input-prestador,
   .input-duracion, 
   .input-valido-desde, 
   .input-valido-hasta{
