@@ -184,9 +184,6 @@ const state = {
     this.setState(currentState);
   },
 
-
-
-
   setAgenda(agenda) {
     const profDni = agenda.prestador;
     // const fechaIn = agenda["valido-desde"]
@@ -322,18 +319,12 @@ const state = {
         const clone = document.importNode(template.content, true);
 
         contenedor.appendChild(clone);
-
-        // `  <tr>
-        //   <th>44</th>
-        //   <th>${d.profDni}</th>
-        //   <th>${d.fecha}</th>
-        //   <th>${d.horario}</th>
-        //   <th>${d.estado}</th>
-        //   <th>${d.paciente}</th>
-        //   <th>X</th>
-        // </tr>`
       }
     }
+  },
+
+  buscarTurnosDisponibles(values, datos) {
+    console.log("TURNOS DISPONIBLES PARA RESERVAR");
   },
 };
 

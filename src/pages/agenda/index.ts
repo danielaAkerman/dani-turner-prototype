@@ -88,7 +88,7 @@ export function pageAgenda(container) {
   <br>
   <button class="button nueva">AGREGAR NUEVA PLANILLA</button>
 
-  <div class="nueva-planilla">
+  <div class="nueva-planilla"><div>
   `;
 
   const form = div.querySelector(".form");
