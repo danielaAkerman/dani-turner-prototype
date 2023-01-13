@@ -26,20 +26,20 @@ export function fechas(inicio: string, fin: string, dia: number) {
   const fecha_inicial = new Date(inicio).getTime() + tres_hs_epoch; // en epoch
   const fecha_final = new Date(fin).getTime() + tres_hs_epoch; // en epoch
   const dia_laborable = dia;
-  const fechas: string[] = [];
+  const fechas: Object[] = [];
   var fecha_actual = fecha_inicial;
 
   while (fecha_actual <= fecha_final) {
     if (new Date(fecha_actual).getDay() == dia_laborable) {
       const fecha_actual_date = new Date(fecha_actual);
       const fecha_formato: string =
-        dia_semana[fecha_actual_date.getDay()] +
-        " " +
-        fecha_actual_date.getDate() +
-        "-"+
-        (fecha_actual_date.getMonth() + 1) +
+        fecha_actual_date.getFullYear() +
         "-" +
-        fecha_actual_date.getFullYear() ;
+        ("0" + (fecha_actual_date.getMonth() + 1)).slice(0,2) +
+        "-" +
+        fecha_actual_date.getDate();
+
+      // fechas.push(fecha_actual_date);
       fechas.push(fecha_formato);
     }
     fecha_actual = fecha_actual + dia_epoch;

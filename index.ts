@@ -171,6 +171,25 @@ app.post("/nuevocliente", function (req, res) {
   res.json({ id: nuevoCliente.id }); // Lo está devolviendo bien?
 });
 
+// PARA VER TURNOS DISPONIBLES
+app.get("/turnos-disponibles", function (req, res) {
+      const {paciente} = req.body;
+    const {prestador} = req.body;
+    const {desde} = req.body["fecha-desde"];
+    const {hasta} = req.body["fecha-hasta"];
+
+  turnosCollection
+    .where("profDni", "==", prestador).where("estado", "==", "Disponible")
+    .get()
+    .then((snap) => {
+      const datas = [];
+      const snapDocs = snap.docs;
+      for (const d of snapDocs) {
+        datas.push(d.data());
+      }
+      res.json(datas);
+    });
+});
 
 // app.post("/rooms", (req, res) => {
 //   const { userId } = req.body;

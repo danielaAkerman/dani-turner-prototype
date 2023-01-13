@@ -10,11 +10,11 @@ export function pageTurnosReservar(container) {
   <label for="paciente" class="label">DNI Paciente:</label>
   <input id="paciente" name="paciente" placeholder="paciente" class="input-paciente" type="text" />
 
-  <label for="profesional" class="label">DNI Prestador:</label>
+  <label for="prestador" class="label">DNI Prestador:</label>
   <input
-      id="profesional"
-      name="profesional" placeholder="profesional"
-      class="input-profesional"
+      id="prestador"
+      name="prestador" placeholder="prestador"
+      class="input-prestador"
       type="text"
     />
 
@@ -60,17 +60,17 @@ export function pageTurnosReservar(container) {
 
   form!.addEventListener("submit", (e) => {
     e.preventDefault();
-    titulosTabla!.innerHTML=`
+    titulosTabla!.innerHTML = `
   <tr>
     <th>ID</th>
-    <th>PROFESIONAL</th>
+    <th>PRESTADOR</th>
     <th>DIA</th>
     <th>HORA</th>
     <th>estado</th>
     <th>PACIENTE</th>
     <th>SELECC</th>
   </tr>
-    `
+    `;
     const target = e.target as any;
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());

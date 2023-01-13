@@ -248,6 +248,7 @@ const state = {
               shortId: uuidv4().slice(0, 7).toUpperCase(),
               profDni: agenda.prestador,
               fecha: f,
+              // fecha: f.toString().slice(4, 15),
               horario: h,
               estado: "Disponible",
               paciente: "",
@@ -324,7 +325,24 @@ const state = {
   },
 
   buscarTurnosDisponibles(values, datos) {
-    console.log("TURNOS DISPONIBLES PARA RESERVAR");
+    // const paciente = values.paciente;
+    // const prestador = values.prestador;
+    // const desde = values["fecha-desde"];
+    // const hasta = values["fecha-hasta"];
+    // fetch(url + "/turnos-disponibles", {
+    //   method: "get",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: values,
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log("Los turnos disponibles son:", data);
+    //   });
+
   },
 };
 
