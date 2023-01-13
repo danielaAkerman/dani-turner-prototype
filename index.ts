@@ -89,6 +89,20 @@ app.get("/turnos/:profDni", function (req, res) {
     });
 });
 
+// PARA VER TURNOS DISPONIBLES
+app.post("/turnos-disponibles", function (req, res) {
+  const prestador = req.body.prestador;
+  const desde = req.body.desde;
+  const hasta = req.body.hasta;
+  const turnosDoc = turnosCollection
+    .where("profDni", "==", prestador)
+    .where("fecha", ">=", desde)
+    .where("fecha", "<=", hasta);
+
+  // newAgendaDoc.set(req.body).then(() => console.log(newAgendaDoc.id));
+  // res.json({ message: "ok" });
+});
+
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
 // app.patch("/users/:id", function (req, res) {
@@ -169,26 +183,6 @@ app.post("/nuevocliente", function (req, res) {
   const nuevoCliente = clientesCollection.doc();
   nuevoCliente.create(req.body).then(() => console.log(nuevoCliente.id));
   res.json({ id: nuevoCliente.id }); // Lo está devolviendo bien?
-});
-
-// PARA VER TURNOS DISPONIBLES
-app.get("/turnos-disponibles", function (req, res) {
-      const {paciente} = req.body;
-    const {prestador} = req.body;
-    const {desde} = req.body["fecha-desde"];
-    const {hasta} = req.body["fecha-hasta"];
-
-  turnosCollection
-    .where("profDni", "==", prestador).where("estado", "==", "Disponible")
-    .get()
-    .then((snap) => {
-      const datas = [];
-      const snapDocs = snap.docs;
-      for (const d of snapDocs) {
-        datas.push(d.data());
-      }
-      res.json(datas);
-    });
 });
 
 // app.post("/rooms", (req, res) => {

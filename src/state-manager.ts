@@ -329,20 +329,20 @@ const state = {
     // const prestador = values.prestador;
     // const desde = values["fecha-desde"];
     // const hasta = values["fecha-hasta"];
-    // fetch(url + "/turnos-disponibles", {
-    //   method: "get",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: values,
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("Los turnos disponibles son:", data);
-    //   });
 
+    fetch(url + "/turnos-detalle", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Se creó el registro ", data);
+      });
   },
 };
 
