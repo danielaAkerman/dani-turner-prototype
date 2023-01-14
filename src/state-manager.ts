@@ -248,6 +248,10 @@ const state = {
               shortId: uuidv4().slice(0, 7).toUpperCase(),
               profDni: agenda.prestador,
               fecha: f,
+              fechaHora:
+                f.toString() +
+                h.toString().slice(0, 2) +
+                h.toString().slice(3, 5),
               fechaFormato:
                 f.toString().slice(6, 8) +
                 " " +

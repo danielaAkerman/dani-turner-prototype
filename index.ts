@@ -78,6 +78,7 @@ app.get("/turnos/:profDni", function (req, res) {
   const { profDni } = req.params;
   turnosCollection
     .where("profDni", "==", profDni)
+    .orderBy("fechaHora")
     .get()
     .then((snap) => {
       const datas = [];
@@ -97,8 +98,9 @@ app.get("/turnos-disponibles/:prestador", function (req, res) {
   turnosCollection
     .where("profDni", "==", prestador.toString())
     .where("estado", "==", "Disponible")
-    .where("fecha", ">=", desde.toString())
-    .where("fecha", "<=", hasta.toString())
+    .where("fechaHora", ">=", desde.toString() + "0000")
+    .where("fechaHora", "<=", hasta.toString() + "2400")
+    .orderBy("fechaHora")
     .get()
     .then((snap) => {
       var datas = [];
