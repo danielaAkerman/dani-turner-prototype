@@ -324,28 +324,28 @@ const state = {
     }
   },
 
-  // buscarTurnosDisponibles(values, datos) {
-  //   const paciente = values.paciente;
-  //   const prestador = values.prestador;
-  //   const desde = values["fecha-desde"];
-  //   const hasta = values["fecha-hasta"];
+  buscarTurnosDisponibles(values, datos) {
+    const paciente = values.paciente;
+    const prestador = values.prestador;
+    const desde = values["fecha-desde"];
+    const hasta = values["fecha-hasta"];
 
-  //   fetch(
-  //     url +
-  //       "/turnos-disponibles/" +
-  //       prestador +
-  //       "?desde=" +
-  //       desde +
-  //       "&hasta=" +
-  //       hasta
-  //   )
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("LOS TURNOS DISPONIBLES SON:", data);
-  //     });
-  // },
+    fetch(
+      url +
+        "/turnos-disponibles/" +
+        prestador +
+        "?desde=" +
+        desde +
+        "&hasta=" +
+        hasta
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("LOS TURNOS DISPONIBLES SON:", data);
+      });
+  },
 };
 
 export { state };

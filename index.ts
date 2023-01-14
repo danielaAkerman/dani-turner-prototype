@@ -90,23 +90,24 @@ app.get("/turnos/:profDni", function (req, res) {
 });
 
 // PARA VER TURNOS DISPONIBLES
-// app.get("/turnos-disponibles/:prestador", function (req, res) {
-//   const { prestador } = req.params;
-//   const { desde } = req.query;
-//   const { hasta } = req.query;
-//   const turnosDisponibles =
-//   turnosCollection
-//     .where("profDni", "==", prestador)
-//     .where("fecha", ">=", desde)
-//     .where("fecha", "<=", hasta)
-//     .where("estado", "==", "Disponible")
-//     .get()
-//     .then((snap) => {
-//       res.json({
-//         message:"ok"
-//       });
-//     });
-// });
+app.get("/turnos-disponibles/:prestador", function (req, res) {
+  const { prestador } = req.params;
+  const { desde } = req.query;
+  const { hasta } = req.query;
+  turnosCollection
+    .where("profDni", "==", prestador.toString())
+    .where("estado", "==", "Disponible")
+    .where("fecha", ">=", desde.toString())
+    .where("fecha", "<=", hasta.toString())
+    .get()
+    .then((snap) => {
+      var datas = [];
+      snap.forEach((doc) => {
+        datas.push(doc.data());
+      });
+      res.json(datas);
+    });
+});
 
 // ACTUALIZA/AGREGA SOLO LOS CAMPOS QUE LE PASO EN BODY
 // LE AGREGUÉ TMB UN LAST ACCESS
