@@ -75,6 +75,20 @@ export function pageTurnosReservar(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
 
+    value["fecha-desde"] =
+      value["fecha-desde"].toString().slice(0, 4) +
+      value["fecha-desde"].toString().slice(5, 7) +
+      value["fecha-desde"].toString().slice(8, 10);
+
+    value["fecha-hasta"] =
+      value["fecha-hasta"].toString().slice(0, 4) +
+      value["fecha-hasta"].toString().slice(5, 7) +
+      value["fecha-hasta"].toString().slice(8, 10);
+
+
+
+    console.log(value);
+
     state.buscarTurnosDisponibles(value, datos);
   });
 

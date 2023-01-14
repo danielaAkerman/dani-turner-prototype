@@ -248,7 +248,12 @@ const state = {
               shortId: uuidv4().slice(0, 7).toUpperCase(),
               profDni: agenda.prestador,
               fecha: f,
-              // fecha: f.toString().slice(4, 15),
+              fechaFormato:
+                f.toString().slice(6, 8) +
+                " " +
+                f.toString().slice(4, 6) +
+                " " +
+                f.toString().slice(0, 4),
               horario: h,
               estado: "Disponible",
               paciente: "",
@@ -306,7 +311,7 @@ const state = {
         dniprof.textContent = d.profDni;
 
         const fecha = template.content.querySelector(".fecha");
-        fecha.textContent = d.fecha;
+        fecha.textContent = d.fechaFormato;
 
         const horario = template.content.querySelector(".horario");
         horario.textContent = d.horario;
@@ -329,6 +334,8 @@ const state = {
     const prestador = values.prestador;
     const desde = values["fecha-desde"];
     const hasta = values["fecha-hasta"];
+
+
 
     fetch(
       url +

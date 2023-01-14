@@ -32,15 +32,12 @@ export function fechas(inicio: string, fin: string, dia: number) {
   while (fecha_actual <= fecha_final) {
     if (new Date(fecha_actual).getDay() == dia_laborable) {
       const fecha_actual_date = new Date(fecha_actual);
-      const fecha_formato: string =
+      const fecha_yyyymmdd: string =
         fecha_actual_date.getFullYear() +
-        "-" +
-        ("0" + (fecha_actual_date.getMonth() + 1)).slice(0,2) +
-        "-" +
+        ("0" + (fecha_actual_date.getMonth() + 1)).slice(0, 2) +
         fecha_actual_date.getDate();
 
-      // fechas.push(fecha_actual_date);
-      fechas.push(fecha_formato);
+      fechas.push(fecha_yyyymmdd);
     }
     fecha_actual = fecha_actual + dia_epoch;
   }
