@@ -85,10 +85,6 @@ export function pageTurnosReservar(container) {
       value["fecha-hasta"].toString().slice(5, 7) +
       value["fecha-hasta"].toString().slice(8, 10);
 
-
-
-    console.log(value);
-
     state.buscarTurnosDisponibles(value, datos);
   });
 

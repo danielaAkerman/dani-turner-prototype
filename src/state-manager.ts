@@ -295,37 +295,36 @@ const state = {
       })
       .then((data) => {
         console.log("La data es: ", data);
-        mostrarResultados(data);
+        this.mostrarResultados(data, datos);
       });
+  },
+  mostrarResultados(data, datos) {
+    const contenedor = datos.querySelector("#results");
+    const template = datos.querySelector("#template");
 
-    function mostrarResultados(data) {
-      const contenedor = datos.querySelector("#results");
-      const template = datos.querySelector("#template");
+    contenedor.replaceChildren();
+    for (const d of data) {
+      const id = template.content.querySelector(".id");
+      id.textContent = d.shortId;
 
-      contenedor.replaceChildren();
-      for (const d of data) {
-        const id = template.content.querySelector(".id");
-        id.textContent = d.shortId;
+      const dniprof = template.content.querySelector(".dniprof");
+      dniprof.textContent = d.profDni;
 
-        const dniprof = template.content.querySelector(".dniprof");
-        dniprof.textContent = d.profDni;
+      const fecha = template.content.querySelector(".fecha");
+      fecha.textContent = d.fechaFormato;
 
-        const fecha = template.content.querySelector(".fecha");
-        fecha.textContent = d.fechaFormato;
+      const horario = template.content.querySelector(".horario");
+      horario.textContent = d.horario;
 
-        const horario = template.content.querySelector(".horario");
-        horario.textContent = d.horario;
+      const estado = template.content.querySelector(".estado");
+      estado.textContent = d.estado;
 
-        const estado = template.content.querySelector(".estado");
-        estado.textContent = d.estado;
+      const paciente = template.content.querySelector(".paciente");
+      paciente.textContent = d.paciente;
 
-        const paciente = template.content.querySelector(".paciente");
-        paciente.textContent = d.paciente;
+      const clone = document.importNode(template.content, true);
 
-        const clone = document.importNode(template.content, true);
-
-        contenedor.appendChild(clone);
-      }
+      contenedor.appendChild(clone);
     }
   },
 
@@ -334,8 +333,6 @@ const state = {
     const prestador = values.prestador;
     const desde = values["fecha-desde"];
     const hasta = values["fecha-hasta"];
-
-
 
     fetch(
       url +
@@ -351,6 +348,7 @@ const state = {
       })
       .then((data) => {
         console.log("LOS TURNOS DISPONIBLES SON:", data);
+        this.mostrarResultados(data, datos);
       });
   },
 };
