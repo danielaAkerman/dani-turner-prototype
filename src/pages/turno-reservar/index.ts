@@ -46,7 +46,7 @@ export function pageTurnosReservar(container) {
       <th class="horario">Horario</th>
       <th class="estado">Estado</th>
       <th class="paciente">Paciente</th>
-      <th class="accion"><button class="x">X</button></th>
+      <th class="accion"></th>
     </tr>
     </table>
   </template>

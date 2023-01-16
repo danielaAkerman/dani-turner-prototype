@@ -2,14 +2,12 @@
   font-family: "Courier New", Courier, monospace;
 }
 
-.table,
-th,
-td {
+.table {
   border: 1px solid;
 }
 
 th {
-    width: 100px;
+  width: 100px;
 }
 
 body {
@@ -33,10 +31,6 @@ h2 {
     font-size: 24px;
   }
 }
-
-
-
-
 
 .form {
   display: flex;
@@ -75,8 +69,8 @@ h2 {
   left: 0px;
 }
 
-
-input, select {
+input,
+select {
   border: solid 1px;
   font-family: "Courier New", Courier, monospace;
   height: 36px;
@@ -84,8 +78,10 @@ input, select {
   background-color: rgb(253, 224, 181);
 }
 
-input:active, select:active, 
-input:focus, select:focus {
+input:active,
+select:active,
+input:focus,
+select:focus {
   outline: none;
   background-color: rgb(240, 177, 140);
   transition: all 0.35s;
