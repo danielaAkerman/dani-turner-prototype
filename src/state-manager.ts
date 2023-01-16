@@ -244,8 +244,10 @@ const state = {
         const turnosCompletos: Object[] = [];
         for (const f of fechasDias_i) {
           for (const h of horariosTurnosDia!) {
+            const id = uuidv4().toUpperCase();
             const datosTurno = {
-              shortId: uuidv4().slice(0, 7).toUpperCase(),
+              longId: id,
+              shortId: id.slice(0, 7),
               profDni: agenda.prestador,
               fecha: f,
               fechaHora:
@@ -302,6 +304,7 @@ const state = {
         this.mostrarResultados(data, datos);
       });
   },
+  
   mostrarResultados(data, datos) {
     const contenedor = datos.querySelector("#results");
     const template = datos.querySelector("#template");
@@ -326,11 +329,22 @@ const state = {
       const paciente = template.content.querySelector(".paciente");
       paciente.textContent = d.paciente;
 
+      // const accion = template.content.querySelector(".accion");
+      // accion.textContent = "X";
+
       const clone = document.importNode(template.content, true);
 
       contenedor.appendChild(clone);
+
+      // this.addListenersAccion(accion)
     }
   },
+
+  // addListenersAccion(a){
+  //   a.addEventListener("click", (e)=>{
+  //     console.log("EL CLICCCCCCCCCCCK")
+  //   })
+  // },
 
   buscarTurnosDisponibles(values, datos) {
     const paciente = values.paciente;

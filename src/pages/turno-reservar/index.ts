@@ -46,7 +46,7 @@ export function pageTurnosReservar(container) {
       <th class="horario">Horario</th>
       <th class="estado">Estado</th>
       <th class="paciente">Paciente</th>
-      <th>x</th>
+      <th class="accion"><button class="x">X</button></th>
     </tr>
     </table>
   </template>
@@ -87,6 +87,8 @@ export function pageTurnosReservar(container) {
 
     state.buscarTurnosDisponibles(value, datos);
   });
+
+
 
   const style = document.createElement("style");
   style.textContent = `
