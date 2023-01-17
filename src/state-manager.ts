@@ -408,6 +408,24 @@ const state = {
         this.mostrarResultadosTurnoOk(data, datos);
       });
   },
+
+  obtenerInfoTurno(turnoId, datos) {
+    fetch(url + "/turnos-datos/" + turnoId)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("LOS DATOS DEL TURNO SELECCIONADO SON:", data);
+        datos!.innerHTML = `
+        <h2>LOS DATOS DEL TURNO SELECCIONADO SON:</h2>
+        <br>
+        <p>ID: ${data.shortId}</p>
+        <p>FECHA: ${data.fechaFormato}</p>
+        <p>HORA: ${data.horario}</p>
+        <p>ESTADO: ${data.estado}</p>
+        `
+      });
+  },
 };
 
 export { state };

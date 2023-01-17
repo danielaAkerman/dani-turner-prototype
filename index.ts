@@ -193,6 +193,17 @@ app.post("/nuevocliente", function (req, res) {
   res.json({ id: nuevoCliente.id }); // Lo está devolviendo bien?
 });
 
+// PARA OBTENER TODOS LOS DATOS DE UN TURNO
+// LE PASAMOS SU LONGID, DEVUELVE TODO EL OBJETO
+app.get("/turnos-datos/:longId", function (req, res) {
+  const { longId } = req.params;
+  const datosTurno = turnosCollection.where("longId", "==", longId.toString());
+  datosTurno.get().then((snap) => {
+    const snapData = snap.docs[0].data();
+    res.json(snapData);
+  });
+});
+
 // app.post("/rooms", (req, res) => {
 //   const { userId } = req.body;
 //   usersCollection
