@@ -409,13 +409,12 @@ const state = {
       });
   },
 
-  obtenerInfoTurno(turnoId, datos) {
+  obtenerInfoTurno(turnoId, paciente, datos) {
     fetch(url + "/turnos-datos/" + turnoId)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        console.log("LOS DATOS DEL TURNO SELECCIONADO SON:", data);
         datos!.innerHTML = `
         <h2>LOS DATOS DEL TURNO SELECCIONADO SON:</h2>
         <br>
@@ -423,9 +422,26 @@ const state = {
         <p>FECHA: ${data.fechaFormato}</p>
         <p>HORA: ${data.horario}</p>
         <p>ESTADO: ${data.estado}</p>
-        `
+        <br>
+        <p>PARA EL PACIENTE: ${paciente}</p>
+        <br>
+        <br>
+
+        <button class="button reservar">RESERVAR</button>
+        `;
+        const buttonReservar = datos.querySelector(".reservar");
+
+        buttonReservar.addEventListener("click", () => {
+          this.reservarTurno(turnoId, paciente)
+        });
       });
   },
+  reservarTurno(turnoId, paciente){
+    console.log("reservooo", turnoId, paciente)
+
+
+    
+  }
 };
 
 export { state };

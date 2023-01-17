@@ -9,21 +9,22 @@ export function pageTurnosOK(container) {
   
   const div = document.createElement("div");
   div.innerHTML = `
-  <h2>TURNOS OKKK</h2>
-  
-  
+ 
   <div class="datos">Obteniendo la información del turno...<div>  
-  
-  
+    
   `;
   const datos = div.querySelector(".datos");
-  const infoTurno = state.obtenerInfoTurno(turnoId, datos);
+  const infoTurno = state.obtenerInfoTurno(turnoId, paciente, datos);
 
   const style = document.createElement("style");
   style.textContent = `
   .titulo{
     font-size: 58px;
     text-align: center;
+  }
+  .datos{
+    text-align: center;
+
   }
 `;
   div.appendChild(style);
