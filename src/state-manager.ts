@@ -306,6 +306,7 @@ const state = {
   },
 
   mostrarResultados(data, datos) {
+    const currentState = this.getState();
     const contenedor = datos.querySelector("#results");
     const template = datos.querySelector("#template");
 
@@ -329,19 +330,19 @@ const state = {
       const paciente = template.content.querySelector(".paciente");
       paciente.textContent = d.paciente;
 
+
       const accion = template.content.querySelector(".accion");
       accion.innerHTML = `
-      <button class="button x ${d.longId}">X</button>
+      <a href="/redirect">
+        <button id="x" class="button x ${d.longId}">X</button>
+      </a>
       `;
 
       const clone = document.importNode(template.content, true);
 
       contenedor.appendChild(clone);
-
-
     }
   },
-
 
   buscarTurnosDisponibles(values, datos) {
     const paciente = values.paciente;

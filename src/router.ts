@@ -49,6 +49,10 @@ const routes = [
     path: /\/turno-ver/,
     handler: pageTurnosVer,
   },
+  // {
+  //   path: /\/redirect/,
+  //   handler: pageDashboard,
+  // },
 ];
 
 export function initRouter(container: Element) {

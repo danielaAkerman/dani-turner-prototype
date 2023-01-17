@@ -1,6 +1,7 @@
 import { state } from "../../state-manager";
 
 export function pageTurnosReservar(container) {
+  const currentState = state.getState();
   const div = document.createElement("div");
   div.innerHTML = `
   <h2>RESERVA DE TURNOS</h2>
@@ -75,6 +76,9 @@ export function pageTurnosReservar(container) {
     const data = new FormData(target);
     const value = Object.fromEntries(data.entries());
 
+    currentState.paciente = value.paciente;
+    state.setState(currentState);
+
     value["fecha-desde"] =
       value["fecha-desde"].toString().slice(0, 4) +
       value["fecha-desde"].toString().slice(5, 7) +
@@ -87,8 +91,6 @@ export function pageTurnosReservar(container) {
 
     state.buscarTurnosDisponibles(value, datos);
   });
-
-
 
   const style = document.createElement("style");
   style.textContent = `
