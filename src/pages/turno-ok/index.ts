@@ -15,6 +15,15 @@ export function pageTurnosOK(container) {
   `;
 
   
+const dir = document.URL
+const querys = ((document.URL).split("/"))[4]
+const turnoId = (querys.split("?"))[0]
+const paciente = (querys.split("="))[1]
+console.log(paciente)
+
+
+
+
   const style = document.createElement("style");
   style.textContent = `
   .titulo{
