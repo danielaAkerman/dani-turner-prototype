@@ -301,12 +301,13 @@ const state = {
       })
       .then((data) => {
         console.log("La data es: ", data);
-        this.mostrarResultados(data, datos);
+        this.mostrarResultadosVer(data, datos);
       });
   },
 
-  mostrarResultados(data, datos) {
+  mostrarResultadosVer(data, datos) {
     const currentState = this.getState();
+
     const contenedor = datos.querySelector("#results");
     const template = datos.querySelector("#template");
 
@@ -330,11 +331,51 @@ const state = {
       const paciente = template.content.querySelector(".paciente");
       paciente.textContent = d.paciente;
 
+      // // var redirect = d.longId + "?paciente=" + currentState.paciente;
+      // const accion = template.content.querySelector(".accion");
+      // accion.innerHTML = `
+      // <a href="/turno-ok/${redirect}">
+      //   <button class="button">VER</button>
+      // </a>
+      // `;
 
+      const clone = document.importNode(template.content, true);
+
+      contenedor.appendChild(clone);
+    }
+  },
+
+  mostrarResultadosTurnoOk(data, datos) {
+    const currentState = this.getState();
+
+    const contenedor = datos.querySelector("#results");
+    const template = datos.querySelector("#template");
+
+    contenedor.replaceChildren();
+    for (const d of data) {
+      const id = template.content.querySelector(".id");
+      id.textContent = d.shortId;
+
+      const dniprof = template.content.querySelector(".dniprof");
+      dniprof.textContent = d.profDni;
+
+      const fecha = template.content.querySelector(".fecha");
+      fecha.textContent = d.fechaFormato;
+
+      const horario = template.content.querySelector(".horario");
+      horario.textContent = d.horario;
+
+      const estado = template.content.querySelector(".estado");
+      estado.textContent = d.estado;
+
+      const paciente = template.content.querySelector(".paciente");
+      paciente.textContent = d.paciente;
+
+      var redirect = d.longId + "?paciente=" + currentState.paciente;
       const accion = template.content.querySelector(".accion");
       accion.innerHTML = `
-      <a href="/redirect">
-        <button id="x" class="button x ${d.longId}">X</button>
+      <a href="/turno-ok/${redirect}">
+        <button class="button">VER</button>
       </a>
       `;
 
@@ -364,7 +405,7 @@ const state = {
       })
       .then((data) => {
         console.log("LOS TURNOS DISPONIBLES SON:", data);
-        this.mostrarResultados(data, datos);
+        this.mostrarResultadosTurnoOk(data, datos);
       });
   },
 };

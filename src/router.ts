@@ -7,6 +7,7 @@ import { pageClienteFormulario } from "./pages/cliente-formulario";
 import { pageClienteVer } from "./pages/cliente-ver";
 import { pageTurnosReservar } from "./pages/turno-reservar";
 import { pageTurnosVer } from "./pages/turno-ver";
+import { pageTurnosOK } from "./pages/turno-ok";
 
 const routes = [
   {
@@ -49,10 +50,10 @@ const routes = [
     path: /\/turno-ver/,
     handler: pageTurnosVer,
   },
-  // {
-  //   path: /\/redirect/,
-  //   handler: pageDashboard,
-  // },
+  {
+    path: /\/turno-ok\/./,
+    handler: pageTurnosOK,
+  },
 ];
 
 export function initRouter(container: Element) {
