@@ -205,15 +205,18 @@ app.get("/turnos-datos/:longId", function (req, res) {
   });
 });
 
-// app.patch("/reserva-turno-ok", function (req, res) {
-//   const { turnoId } = req.body;
-//   const { paciente } = req.body;
-//   const turnoReservar = turnosCollection.where("longId", "==", turnoId.toString());
-//   turnoReservar.get().then((snap) => {
-//     const snapData = snap.docs[0].data();
-//     res.json(snapData);
-//   });
-// })
+app.patch("/reserva-turno-ok", function (req, res) {
+  const { turnoId } = req.body;
+  const { paciente } = req.body;
+  const turnoAReservar = turnosCollection.doc(turnoId);
+  turnoAReservar.update({
+    estado : "Reservado",
+    paciente,
+  }).then((snap) => {
+
+    res.json({message: "El turno ha sido reservado exitosamente"});
+  });
+})
 
 
 // app.post("/rooms", (req, res) => {
