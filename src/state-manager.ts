@@ -275,7 +275,7 @@ const state = {
       i++;
     }
   },
-  
+
   pushTurnos(turnosCompletos) {
     for (const t of turnosCompletos) {
       fetch(url + "/turnos-detalle", {
@@ -433,16 +433,25 @@ const state = {
         const buttonReservar = datos.querySelector(".reservar");
 
         buttonReservar.addEventListener("click", () => {
-          this.reservarTurno(turnoId, paciente)
+          this.reservarTurno(turnoId, paciente);
         });
       });
   },
-  reservarTurno(turnoId, paciente){
-    console.log("reservooo", turnoId, paciente)
 
-
-    
-  }
+  reservarTurno(turnoId, paciente) {
+    console.log("reservooo", turnoId, paciente);
+    fetch(url + "/reserva-turno-ok", {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ turnoId, paciente }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  },
 };
 
 export { state };
