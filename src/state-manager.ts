@@ -275,6 +275,7 @@ const state = {
       i++;
     }
   },
+  
   pushTurnos(turnosCompletos) {
     for (const t of turnosCompletos) {
       fetch(url + "/turnos-detalle", {

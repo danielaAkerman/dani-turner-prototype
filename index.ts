@@ -137,7 +137,8 @@ app.post("/agenda/:dni", function (req, res) {
 // LO QUE OBTENGA POR REQ.BODY
 // DEVUELVE EL NUEVO ID
 app.post("/turnos-detalle", function (req, res) {
-  const nuevoTurno = turnosCollection.doc();
+  const {longId} = req.body
+  const nuevoTurno = turnosCollection.doc(longId);
   nuevoTurno.create(req.body).then((resp) => console.log(nuevoTurno.id));
   res.json({ id: nuevoTurno.id });
 });
@@ -203,6 +204,17 @@ app.get("/turnos-datos/:longId", function (req, res) {
     res.json(snapData);
   });
 });
+
+// app.patch("/reserva-turno-ok", function (req, res) {
+//   const { turnoId } = req.body;
+//   const { paciente } = req.body;
+//   const turnoReservar = turnosCollection.where("longId", "==", turnoId.toString());
+//   turnoReservar.get().then((snap) => {
+//     const snapData = snap.docs[0].data();
+//     res.json(snapData);
+//   });
+// })
+
 
 // app.post("/rooms", (req, res) => {
 //   const { userId } = req.body;
